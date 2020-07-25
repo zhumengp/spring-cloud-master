@@ -14,7 +14,7 @@
 
     <properties>
         <zipkin.version>2.11.10</zipkin.version>
-        <mysql.version>5.1.47</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
     </properties>
 
     <dependencies>
