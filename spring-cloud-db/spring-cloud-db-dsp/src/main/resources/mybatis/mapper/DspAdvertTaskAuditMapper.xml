@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhump.dsp.dao.DspAdvertTaskAuditMapper" >
+  <resultMap id="BaseResultMap" type="com.zhump.dsp.entity.DspAdvertTaskAudit" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="AD_ID" property="adId" jdbcType="VARCHAR" />
+    <result column="CORP_CODE" property="corpCode" jdbcType="VARCHAR" />
+    <result column="AD_THEME" property="adTheme" jdbcType="VARCHAR" />
+    <result column="AD_TYPE" property="adType" jdbcType="INTEGER" />
+    <result column="TOTAL_COUNT" property="totalCount" jdbcType="BIGINT" />
+    <result column="DAILY_LIMIT" property="dailyLimit" jdbcType="BIGINT" />
+    <result column="EFFECT_DATE" property="effectDate" jdbcType="INTEGER" />
+    <result column="EXPIRY_DATE" property="expiryDate" jdbcType="INTEGER" />
+    <result column="START_TIME" property="startTime" jdbcType="VARCHAR" />
+    <result column="END_TIME" property="endTime" jdbcType="VARCHAR" />
+    <result column="SEND_TYPE" property="sendType" jdbcType="INTEGER" />
+    <result column="CONTENT_LENGTH" property="contentLength" jdbcType="VARCHAR" />
+    <result column="REAL_END_TIME" property="realEndTime" jdbcType="TIMESTAMP" />
+    <result column="AD_STATE" property="adState" jdbcType="INTEGER" />
+    <result column="REST_COUNT" property="restCount" jdbcType="BIGINT" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="CREAT_TIME" property="creatTime" jdbcType="TIMESTAMP" />
+    <result column="PUSH_TIME" property="pushTime" jdbcType="VARCHAR" />
+    <result column="AUDIT_STATE" property="auditState" jdbcType="INTEGER" />
+    <result column="TEMPLATE_ID" property="templateId" jdbcType="VARCHAR" />
+    <result column="ISP_ALLOW" property="ispAllow" jdbcType="VARCHAR" />
+    <result column="CAN_REPEAT" property="canRepeat" jdbcType="TINYINT" />
+    <result column="CHECK_TIME" property="checkTime" jdbcType="TIMESTAMP" />
+    <result column="CHECK_REMARK" property="checkRemark" jdbcType="VARCHAR" />
+    <result column="KEY_WORD" property="keyWord" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="REST_REFUND" property="restRefund" jdbcType="INTEGER" />
+    <result column="ASSIGN_TYPE" property="assignType" jdbcType="INTEGER" />
+    <result column="REPLY_DESC" property="replyDesc" jdbcType="VARCHAR" />
+    <result column="copy_ad_id" property="copyAdId" jdbcType="VARCHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="INTEGER" />
+    <result column="QUALITY_IDS" property="qualityIds" jdbcType="VARCHAR" />
+    <result column="MARKET" property="market" jdbcType="INTEGER" />
+    <result column="IS_OPTIMIZE" property="isOptimize" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zhump.dsp.entity.DspAdvertTaskAuditWithBLOBs" extends="BaseResultMap" >
+    <result column="AD_CONTENT" property="adContent" jdbcType="LONGVARCHAR" />
+    <result column="PARAM_DESC" property="paramDesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, AD_ID, CORP_CODE, AD_THEME, AD_TYPE, TOTAL_COUNT, DAILY_LIMIT, EFFECT_DATE, EXPIRY_DATE, 
+    START_TIME, END_TIME, SEND_TYPE, CONTENT_LENGTH, REAL_END_TIME, AD_STATE, REST_COUNT, 
+    UPDATE_TIME, CREAT_TIME, PUSH_TIME, AUDIT_STATE, TEMPLATE_ID, ISP_ALLOW, CAN_REPEAT, 
+    CHECK_TIME, CHECK_REMARK, KEY_WORD, USER_ID, REST_REFUND, ASSIGN_TYPE, REPLY_DESC, 
+    copy_ad_id, ORG_ID, QUALITY_IDS, MARKET, IS_OPTIMIZE
+  </sql>
+  <sql id="Blob_Column_List" >
+    AD_CONTENT, PARAM_DESC
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dsp_advert_task_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dsp_advert_task_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dsp_advert_task_audit
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dsp_advert_task_audit
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditExample" >
+    delete from dsp_advert_task_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditWithBLOBs" >
+    insert into dsp_advert_task_audit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="adId != null" >
+        AD_ID,
+      </if>
+      <if test="corpCode != null" >
+        CORP_CODE,
+      </if>
+      <if test="adTheme != null" >
+        AD_THEME,
+      </if>
+      <if test="adType != null" >
+        AD_TYPE,
+      </if>
+      <if test="totalCount != null" >
+        TOTAL_COUNT,
+      </if>
+      <if test="dailyLimit != null" >
+        DAILY_LIMIT,
+      </if>
+      <if test="effectDate != null" >
+        EFFECT_DATE,
+      </if>
+      <if test="expiryDate != null" >
+        EXPIRY_DATE,
+      </if>
+      <if test="startTime != null" >
+        START_TIME,
+      </if>
+      <if test="endTime != null" >
+        END_TIME,
+      </if>
+      <if test="sendType != null" >
+        SEND_TYPE,
+      </if>
+      <if test="contentLength != null" >
+        CONTENT_LENGTH,
+      </if>
+      <if test="realEndTime != null" >
+        REAL_END_TIME,
+      </if>
+      <if test="adState != null" >
+        AD_STATE,
+      </if>
+      <if test="restCount != null" >
+        REST_COUNT,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="creatTime != null" >
+        CREAT_TIME,
+      </if>
+      <if test="pushTime != null" >
+        PUSH_TIME,
+      </if>
+      <if test="auditState != null" >
+        AUDIT_STATE,
+      </if>
+      <if test="templateId != null" >
+        TEMPLATE_ID,
+      </if>
+      <if test="ispAllow != null" >
+        ISP_ALLOW,
+      </if>
+      <if test="canRepeat != null" >
+        CAN_REPEAT,
+      </if>
+      <if test="checkTime != null" >
+        CHECK_TIME,
+      </if>
+      <if test="checkRemark != null" >
+        CHECK_REMARK,
+      </if>
+      <if test="keyWord != null" >
+        KEY_WORD,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="restRefund != null" >
+        REST_REFUND,
+      </if>
+      <if test="assignType != null" >
+        ASSIGN_TYPE,
+      </if>
+      <if test="replyDesc != null" >
+        REPLY_DESC,
+      </if>
+      <if test="copyAdId != null" >
+        copy_ad_id,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="qualityIds != null" >
+        QUALITY_IDS,
+      </if>
+      <if test="market != null" >
+        MARKET,
+      </if>
+      <if test="isOptimize != null" >
+        IS_OPTIMIZE,
+      </if>
+      <if test="adContent != null" >
+        AD_CONTENT,
+      </if>
+      <if test="paramDesc != null" >
+        PARAM_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="adId != null" >
+        #{adId,jdbcType=VARCHAR},
+      </if>
+      <if test="corpCode != null" >
+        #{corpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="adTheme != null" >
+        #{adTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="adType != null" >
+        #{adType,jdbcType=INTEGER},
+      </if>
+      <if test="totalCount != null" >
+        #{totalCount,jdbcType=BIGINT},
+      </if>
+      <if test="dailyLimit != null" >
+        #{dailyLimit,jdbcType=BIGINT},
+      </if>
+      <if test="effectDate != null" >
+        #{effectDate,jdbcType=INTEGER},
+      </if>
+      <if test="expiryDate != null" >
+        #{expiryDate,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sendType != null" >
+        #{sendType,jdbcType=INTEGER},
+      </if>
+      <if test="contentLength != null" >
+        #{contentLength,jdbcType=VARCHAR},
+      </if>
+      <if test="realEndTime != null" >
+        #{realEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adState != null" >
+        #{adState,jdbcType=INTEGER},
+      </if>
+      <if test="restCount != null" >
+        #{restCount,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushTime != null" >
+        #{pushTime,jdbcType=VARCHAR},
+      </if>
+      <if test="auditState != null" >
+        #{auditState,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="ispAllow != null" >
+        #{ispAllow,jdbcType=VARCHAR},
+      </if>
+      <if test="canRepeat != null" >
+        #{canRepeat,jdbcType=TINYINT},
+      </if>
+      <if test="checkTime != null" >
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkRemark != null" >
+        #{checkRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord != null" >
+        #{keyWord,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="restRefund != null" >
+        #{restRefund,jdbcType=INTEGER},
+      </if>
+      <if test="assignType != null" >
+        #{assignType,jdbcType=INTEGER},
+      </if>
+      <if test="replyDesc != null" >
+        #{replyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="copyAdId != null" >
+        #{copyAdId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="qualityIds != null" >
+        #{qualityIds,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null" >
+        #{market,jdbcType=INTEGER},
+      </if>
+      <if test="isOptimize != null" >
+        #{isOptimize,jdbcType=INTEGER},
+      </if>
+      <if test="adContent != null" >
+        #{adContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="paramDesc != null" >
+        #{paramDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditExample" resultType="java.lang.Integer" >
+    select count(*) from dsp_advert_task_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dsp_advert_task_audit
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.adId != null" >
+        AD_ID = #{record.adId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corpCode != null" >
+        CORP_CODE = #{record.corpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adTheme != null" >
+        AD_THEME = #{record.adTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adType != null" >
+        AD_TYPE = #{record.adType,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalCount != null" >
+        TOTAL_COUNT = #{record.totalCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.dailyLimit != null" >
+        DAILY_LIMIT = #{record.dailyLimit,jdbcType=BIGINT},
+      </if>
+      <if test="record.effectDate != null" >
+        EFFECT_DATE = #{record.effectDate,jdbcType=INTEGER},
+      </if>
+      <if test="record.expiryDate != null" >
+        EXPIRY_DATE = #{record.expiryDate,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null" >
+        START_TIME = #{record.startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null" >
+        END_TIME = #{record.endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendType != null" >
+        SEND_TYPE = #{record.sendType,jdbcType=INTEGER},
+      </if>
+      <if test="record.contentLength != null" >
+        CONTENT_LENGTH = #{record.contentLength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realEndTime != null" >
+        REAL_END_TIME = #{record.realEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.adState != null" >
+        AD_STATE = #{record.adState,jdbcType=INTEGER},
+      </if>
+      <if test="record.restCount != null" >
+        REST_COUNT = #{record.restCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatTime != null" >
+        CREAT_TIME = #{record.creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pushTime != null" >
+        PUSH_TIME = #{record.pushTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditState != null" >
+        AUDIT_STATE = #{record.auditState,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateId != null" >
+        TEMPLATE_ID = #{record.templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ispAllow != null" >
+        ISP_ALLOW = #{record.ispAllow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.canRepeat != null" >
+        CAN_REPEAT = #{record.canRepeat,jdbcType=TINYINT},
+      </if>
+      <if test="record.checkTime != null" >
+        CHECK_TIME = #{record.checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkRemark != null" >
+        CHECK_REMARK = #{record.checkRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyWord != null" >
+        KEY_WORD = #{record.keyWord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.restRefund != null" >
+        REST_REFUND = #{record.restRefund,jdbcType=INTEGER},
+      </if>
+      <if test="record.assignType != null" >
+        ASSIGN_TYPE = #{record.assignType,jdbcType=INTEGER},
+      </if>
+      <if test="record.replyDesc != null" >
+        REPLY_DESC = #{record.replyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.copyAdId != null" >
+        copy_ad_id = #{record.copyAdId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        ORG_ID = #{record.orgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.qualityIds != null" >
+        QUALITY_IDS = #{record.qualityIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.market != null" >
+        MARKET = #{record.market,jdbcType=INTEGER},
+      </if>
+      <if test="record.isOptimize != null" >
+        IS_OPTIMIZE = #{record.isOptimize,jdbcType=INTEGER},
+      </if>
+      <if test="record.adContent != null" >
+        AD_CONTENT = #{record.adContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.paramDesc != null" >
+        PARAM_DESC = #{record.paramDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditWithBLOBs" >
+    update dsp_advert_task_audit
+    <set >
+      <if test="adId != null" >
+        AD_ID = #{adId,jdbcType=VARCHAR},
+      </if>
+      <if test="corpCode != null" >
+        CORP_CODE = #{corpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="adTheme != null" >
+        AD_THEME = #{adTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="adType != null" >
+        AD_TYPE = #{adType,jdbcType=INTEGER},
+      </if>
+      <if test="totalCount != null" >
+        TOTAL_COUNT = #{totalCount,jdbcType=BIGINT},
+      </if>
+      <if test="dailyLimit != null" >
+        DAILY_LIMIT = #{dailyLimit,jdbcType=BIGINT},
+      </if>
+      <if test="effectDate != null" >
+        EFFECT_DATE = #{effectDate,jdbcType=INTEGER},
+      </if>
+      <if test="expiryDate != null" >
+        EXPIRY_DATE = #{expiryDate,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        START_TIME = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        END_TIME = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sendType != null" >
+        SEND_TYPE = #{sendType,jdbcType=INTEGER},
+      </if>
+      <if test="contentLength != null" >
+        CONTENT_LENGTH = #{contentLength,jdbcType=VARCHAR},
+      </if>
+      <if test="realEndTime != null" >
+        REAL_END_TIME = #{realEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adState != null" >
+        AD_STATE = #{adState,jdbcType=INTEGER},
+      </if>
+      <if test="restCount != null" >
+        REST_COUNT = #{restCount,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatTime != null" >
+        CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushTime != null" >
+        PUSH_TIME = #{pushTime,jdbcType=VARCHAR},
+      </if>
+      <if test="auditState != null" >
+        AUDIT_STATE = #{auditState,jdbcType=INTEGER},
+      </if>
+      <if test="templateId != null" >
+        TEMPLATE_ID = #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="ispAllow != null" >
+        ISP_ALLOW = #{ispAllow,jdbcType=VARCHAR},
+      </if>
+      <if test="canRepeat != null" >
+        CAN_REPEAT = #{canRepeat,jdbcType=TINYINT},
+      </if>
+      <if test="checkTime != null" >
+        CHECK_TIME = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkRemark != null" >
+        CHECK_REMARK = #{checkRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord != null" >
+        KEY_WORD = #{keyWord,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="restRefund != null" >
+        REST_REFUND = #{restRefund,jdbcType=INTEGER},
+      </if>
+      <if test="assignType != null" >
+        ASSIGN_TYPE = #{assignType,jdbcType=INTEGER},
+      </if>
+      <if test="replyDesc != null" >
+        REPLY_DESC = #{replyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="copyAdId != null" >
+        copy_ad_id = #{copyAdId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="qualityIds != null" >
+        QUALITY_IDS = #{qualityIds,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null" >
+        MARKET = #{market,jdbcType=INTEGER},
+      </if>
+      <if test="isOptimize != null" >
+        IS_OPTIMIZE = #{isOptimize,jdbcType=INTEGER},
+      </if>
+      <if test="adContent != null" >
+        AD_CONTENT = #{adContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="paramDesc != null" >
+        PARAM_DESC = #{paramDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditWithBLOBs" >
+    update dsp_advert_task_audit
+    set AD_ID = #{adId,jdbcType=VARCHAR},
+      CORP_CODE = #{corpCode,jdbcType=VARCHAR},
+      AD_THEME = #{adTheme,jdbcType=VARCHAR},
+      AD_TYPE = #{adType,jdbcType=INTEGER},
+      TOTAL_COUNT = #{totalCount,jdbcType=BIGINT},
+      DAILY_LIMIT = #{dailyLimit,jdbcType=BIGINT},
+      EFFECT_DATE = #{effectDate,jdbcType=INTEGER},
+      EXPIRY_DATE = #{expiryDate,jdbcType=INTEGER},
+      START_TIME = #{startTime,jdbcType=VARCHAR},
+      END_TIME = #{endTime,jdbcType=VARCHAR},
+      SEND_TYPE = #{sendType,jdbcType=INTEGER},
+      CONTENT_LENGTH = #{contentLength,jdbcType=VARCHAR},
+      REAL_END_TIME = #{realEndTime,jdbcType=TIMESTAMP},
+      AD_STATE = #{adState,jdbcType=INTEGER},
+      REST_COUNT = #{restCount,jdbcType=BIGINT},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      PUSH_TIME = #{pushTime,jdbcType=VARCHAR},
+      AUDIT_STATE = #{auditState,jdbcType=INTEGER},
+      TEMPLATE_ID = #{templateId,jdbcType=VARCHAR},
+      ISP_ALLOW = #{ispAllow,jdbcType=VARCHAR},
+      CAN_REPEAT = #{canRepeat,jdbcType=TINYINT},
+      CHECK_TIME = #{checkTime,jdbcType=TIMESTAMP},
+      CHECK_REMARK = #{checkRemark,jdbcType=VARCHAR},
+      KEY_WORD = #{keyWord,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=BIGINT},
+      REST_REFUND = #{restRefund,jdbcType=INTEGER},
+      ASSIGN_TYPE = #{assignType,jdbcType=INTEGER},
+      REPLY_DESC = #{replyDesc,jdbcType=VARCHAR},
+      copy_ad_id = #{copyAdId,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=INTEGER},
+      QUALITY_IDS = #{qualityIds,jdbcType=VARCHAR},
+      MARKET = #{market,jdbcType=INTEGER},
+      IS_OPTIMIZE = #{isOptimize,jdbcType=INTEGER},
+      AD_CONTENT = #{adContent,jdbcType=LONGVARCHAR},
+      PARAM_DESC = #{paramDesc,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhump.dsp.dao.DspAdvertLabelAuditMapper" >
+  <resultMap id="BaseResultMap" type="com.zhump.dsp.entity.DspAdvertLabelAudit" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="AD_ID" property="adId" jdbcType="VARCHAR" />
+    <result column="LABEL_ID" property="labelId" jdbcType="INTEGER" />
+    <result column="TAG_VALUE_TYPE" property="tagValueType" jdbcType="INTEGER" />
+    <result column="MIN_VALUE" property="minValue" jdbcType="BIGINT" />
+    <result column="MAX_VALUE" property="maxValue" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, AD_ID, LABEL_ID, TAG_VALUE_TYPE, MIN_VALUE, MAX_VALUE, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhump.dsp.entity.DspAdvertLabelAuditExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dsp_advert_label_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dsp_advert_label_audit
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dsp_advert_label_audit
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhump.dsp.entity.DspAdvertLabelAuditExample" >
+    delete from dsp_advert_label_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.zhump.dsp.entity.DspAdvertLabelAudit" >
+    insert into dsp_advert_label_audit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="adId != null" >
+        AD_ID,
+      </if>
+      <if test="labelId != null" >
+        LABEL_ID,
+      </if>
+      <if test="tagValueType != null" >
+        TAG_VALUE_TYPE,
+      </if>
+      <if test="minValue != null" >
+        MIN_VALUE,
+      </if>
+      <if test="maxValue != null" >
+        MAX_VALUE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="adId != null" >
+        #{adId,jdbcType=VARCHAR},
+      </if>
+      <if test="labelId != null" >
+        #{labelId,jdbcType=INTEGER},
+      </if>
+      <if test="tagValueType != null" >
+        #{tagValueType,jdbcType=INTEGER},
+      </if>
+      <if test="minValue != null" >
+        #{minValue,jdbcType=BIGINT},
+      </if>
+      <if test="maxValue != null" >
+        #{maxValue,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhump.dsp.entity.DspAdvertLabelAuditExample" resultType="java.lang.Integer" >
+    select count(*) from dsp_advert_label_audit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dsp_advert_label_audit
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.adId != null" >
+        AD_ID = #{record.adId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labelId != null" >
+        LABEL_ID = #{record.labelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagValueType != null" >
+        TAG_VALUE_TYPE = #{record.tagValueType,jdbcType=INTEGER},
+      </if>
+      <if test="record.minValue != null" >
+        MIN_VALUE = #{record.minValue,jdbcType=BIGINT},
+      </if>
+      <if test="record.maxValue != null" >
+        MAX_VALUE = #{record.maxValue,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhump.dsp.entity.DspAdvertLabelAudit" >
+    update dsp_advert_label_audit
+    <set >
+      <if test="adId != null" >
+        AD_ID = #{adId,jdbcType=VARCHAR},
+      </if>
+      <if test="labelId != null" >
+        LABEL_ID = #{labelId,jdbcType=INTEGER},
+      </if>
+      <if test="tagValueType != null" >
+        TAG_VALUE_TYPE = #{tagValueType,jdbcType=INTEGER},
+      </if>
+      <if test="minValue != null" >
+        MIN_VALUE = #{minValue,jdbcType=BIGINT},
+      </if>
+      <if test="maxValue != null" >
+        MAX_VALUE = #{maxValue,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <insert id="insertBatch" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+    insert into DSP_ADVERT_LABEL (AD_ID,LABEL_ID) values
+    <foreach collection="items" item="item" index="index" separator=",">
+      (
+      #{item.adId},
+      #{item.labelId}
+      )
+
+    </foreach>
+  </insert>
+</mapper>

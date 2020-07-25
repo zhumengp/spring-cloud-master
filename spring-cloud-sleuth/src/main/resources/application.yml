@@ -1,0 +1,28 @@
+server:
+  port: 9411
+spring:
+  application:
+    name: zipkin-server
+  datasource:
+    url: jdbc:mysql://192.169.2.63:3306/zhump_blog
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  main:
+    allow-bean-definition-overriding: true
+  sleuth:
+    enabled: false
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:6011/eureka/
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
+#zipkin:
+##  storage:
+##    type: mysql

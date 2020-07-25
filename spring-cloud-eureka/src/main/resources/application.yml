@@ -1,0 +1,19 @@
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    #�Ƿ��Լ��ķ���ע�ᵽ�Լ�eureka����
+    registerWithEureka: false
+    #��Ϊ�Լ��Ƿ������ģ����Բ���Ҫȥ����������Ϣ
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    #��eureka���ұ������ƹرգ����з���崻�ʱ���ܸ���ʱ������ʱ�������
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 2000
+server:
+  port: 6011
+spring:
+  application:
+    name: eureka
