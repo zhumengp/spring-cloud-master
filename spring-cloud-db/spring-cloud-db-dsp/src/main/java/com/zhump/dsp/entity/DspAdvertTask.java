@@ -1,18 +1,24 @@
 package com.zhump.dsp.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
+@ApiModel(value = "响应实体类")
 public class DspAdvertTask implements Serializable {
 
     private static final long serialVersionUID = 2805094404469002498L;
     /**主键*/
+    @ApiModelProperty(value = "主键")
     private Integer id;
     /**任务ID*/
+    @ApiModelProperty(value = "任务ID")
     private String adId;
     /**广告主编码*/
+    @ApiModelProperty(value = "广告主编码")
     private String corpCode;
     /**主题*/
     private String adTheme;

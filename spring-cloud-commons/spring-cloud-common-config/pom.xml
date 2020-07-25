@@ -3,18 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>spring-cloud-master</artifactId>
+        <artifactId>spring-cloud-commons</artifactId>
         <groupId>org.com.zhump</groupId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-    <modules>
-        <module>spring-cloud-common-base</module>
-        <module>spring-cloud-common-config</module>
-    </modules>
 
-    <artifactId>spring-cloud-commons</artifactId>
+    <artifactId>spring-cloud-common-config</artifactId>
 
 
 </project>
