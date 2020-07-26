@@ -61,6 +61,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.com.zhump</groupId>
+            <artifactId>spring-cloud-common-config</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 

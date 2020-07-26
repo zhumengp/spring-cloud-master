@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zhump.dsp.dao.DspCrowdPackageMapper" >
-  <resultMap id="BaseResultMap" type="com.zhump.dsp.entity.DspCrowdPackage" >
+<mapper namespace="org.com.zhump.dsp.dao.DspCrowdPackageMapper" >
+  <resultMap id="BaseResultMap" type="org.com.zhump.dsp.entity.DspCrowdPackage" >
     <id column="ID" property="id" jdbcType="BIGINT" />
     <result column="NAME" property="name" jdbcType="VARCHAR" />
     <result column="DESCIPTION" property="desciption" jdbcType="VARCHAR" />
@@ -15,7 +15,7 @@
     <result column="D_AD_ID" property="dAdId" jdbcType="INTEGER" />
     <result column="CORP_CODE" property="corpCode" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.zhump.dsp.entity.DspCrowdPackage" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="org.com.zhump.dsp.entity.DspCrowdPackage" extends="BaseResultMap" >
     <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -83,7 +83,7 @@
   <sql id="Blob_Column_List" >
     CONTENT
   </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zhump.dsp.entity.DspCrowdPackageExample" >
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="org.com.zhump.dsp.entity.DspCrowdPackageExample" >
     select
     <if test="distinct" >
       distinct
@@ -99,7 +99,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhump.dsp.entity.DspCrowdPackageExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.com.zhump.dsp.entity.DspCrowdPackageExample" >
     select
     <if test="distinct" >
       distinct
@@ -125,14 +125,14 @@
     delete from dsp_crowd_package
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zhump.dsp.entity.DspCrowdPackageExample" >
+  <delete id="deleteByExample" parameterType="org.com.zhump.dsp.entity.DspCrowdPackageExample" >
     delete from dsp_crowd_package
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
 
-  <insert id="insertSelective" parameterType="com.zhump.dsp.entity.DspCrowdPackage" >
+  <insert id="insertSelective" parameterType="org.com.zhump.dsp.entity.DspCrowdPackage" >
     insert into dsp_crowd_package
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -217,7 +217,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zhump.dsp.entity.DspCrowdPackageExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="org.com.zhump.dsp.entity.DspCrowdPackageExample" resultType="java.lang.Integer" >
     select count(*) from dsp_crowd_package
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -289,7 +289,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zhump.dsp.entity.DspCrowdPackage" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.com.zhump.dsp.entity.DspCrowdPackage" >
     update dsp_crowd_package
     <set >
       <if test="name != null" >

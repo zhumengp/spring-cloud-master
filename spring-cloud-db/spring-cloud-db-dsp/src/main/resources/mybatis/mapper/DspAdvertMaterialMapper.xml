@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zhump.dsp.dao.DspAdvertMaterialMapper" >
-  <resultMap id="BaseResultMap" type="com.zhump.dsp.entity.DspAdvertMaterial" >
+<mapper namespace="org.com.zhump.dsp.dao.DspAdvertMaterialMapper" >
+  <resultMap id="BaseResultMap" type="org.com.zhump.dsp.entity.DspAdvertMaterial" >
     <id column="ID" property="id" jdbcType="BIGINT" />
     <result column="TYPE" property="type" jdbcType="INTEGER" />
     <result column="CORP_CODE" property="corpCode" jdbcType="VARCHAR" />
@@ -93,7 +93,7 @@
     CALSSIFY, USER_ID, MATERIAL_SWITCH, CREATE_TIME, UPDATE_TIME, ORG_ID, URL_S, PATH_S, 
     SIZE_S, URL_M, PATH_M, SIZE_M, URL_L, PATH_L, SIZE_L, DURATION_M, ASYTASKID
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhump.dsp.entity.DspAdvertMaterialExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.com.zhump.dsp.entity.DspAdvertMaterialExample" >
     select
     <if test="distinct" >
       distinct
@@ -117,14 +117,14 @@
     delete from dsp_advert_material
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zhump.dsp.entity.DspAdvertMaterialExample" >
+  <delete id="deleteByExample" parameterType="org.com.zhump.dsp.entity.DspAdvertMaterialExample" >
     delete from dsp_advert_material
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
 
-  <insert id="insertSelective" parameterType="com.zhump.dsp.entity.DspAdvertMaterial" >
+  <insert id="insertSelective" parameterType="org.com.zhump.dsp.entity.DspAdvertMaterial" >
     insert into dsp_advert_material
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -293,7 +293,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zhump.dsp.entity.DspAdvertMaterialExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="org.com.zhump.dsp.entity.DspAdvertMaterialExample" resultType="java.lang.Integer" >
     select count(*) from dsp_advert_material
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -389,7 +389,7 @@
     </if>
   </update>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.zhump.dsp.entity.DspAdvertMaterial" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.com.zhump.dsp.entity.DspAdvertMaterial" >
     update dsp_advert_material
     <set >
       <if test="type != null" >

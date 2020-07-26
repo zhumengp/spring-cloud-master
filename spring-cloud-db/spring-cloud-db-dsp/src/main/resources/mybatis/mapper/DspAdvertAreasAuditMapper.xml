@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zhump.dsp.dao.DspAdvertAreasAuditMapper" >
-  <resultMap id="BaseResultMap" type="com.zhump.dsp.entity.DspAdvertAreasAudit" >
+<mapper namespace="org.com.zhump.dsp.dao.DspAdvertAreasAuditMapper" >
+  <resultMap id="BaseResultMap" type="org.com.zhump.dsp.entity.DspAdvertAreasAudit" >
     <id column="ID" property="id" jdbcType="INTEGER" />
     <result column="AD_ID" property="adId" jdbcType="VARCHAR" />
     <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
@@ -73,7 +73,7 @@
   <sql id="Base_Column_List" >
     ID, AD_ID, PROVINCE, CITY, REGION_CODE, ADDRESS, COORDINATE, SCOPE, TYPE
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhump.dsp.entity.DspAdvertAreasAuditExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.com.zhump.dsp.entity.DspAdvertAreasAuditExample" >
     select
     <if test="distinct" >
       distinct
@@ -93,14 +93,14 @@
     from dsp_advert_areas_audit
     where ID = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByExample" parameterType="com.zhump.dsp.entity.DspAdvertAreasAuditExample" >
+  <delete id="deleteByExample" parameterType="org.com.zhump.dsp.entity.DspAdvertAreasAuditExample" >
     delete from dsp_advert_areas_audit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
 
-  <insert id="insertSelective" parameterType="com.zhump.dsp.entity.DspAdvertAreasAudit" >
+  <insert id="insertSelective" parameterType="org.com.zhump.dsp.entity.DspAdvertAreasAudit" >
     insert into dsp_advert_areas_audit
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -161,7 +161,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zhump.dsp.entity.DspAdvertAreasAuditExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="org.com.zhump.dsp.entity.DspAdvertAreasAuditExample" resultType="java.lang.Integer" >
     select count(*) from dsp_advert_areas_audit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -203,7 +203,7 @@
     </if>
   </update>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.zhump.dsp.entity.DspAdvertAreasAudit" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.com.zhump.dsp.entity.DspAdvertAreasAudit" >
     update dsp_advert_areas_audit
     <set >
       <if test="adId != null" >

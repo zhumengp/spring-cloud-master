@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zhump.dsp.dao.DspAdvertTaskAuditMapper" >
-  <resultMap id="BaseResultMap" type="com.zhump.dsp.entity.DspAdvertTaskAudit" >
+<mapper namespace="org.com.zhump.dsp.dao.DspAdvertTaskAuditMapper" >
+  <resultMap id="BaseResultMap" type="org.com.zhump.dsp.entity.DspAdvertTaskAudit" >
     <id column="ID" property="id" jdbcType="INTEGER" />
     <result column="AD_ID" property="adId" jdbcType="VARCHAR" />
     <result column="CORP_CODE" property="corpCode" jdbcType="VARCHAR" />
@@ -38,7 +38,7 @@
     <result column="MARKET" property="market" jdbcType="INTEGER" />
     <result column="IS_OPTIMIZE" property="isOptimize" jdbcType="INTEGER" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.zhump.dsp.entity.DspAdvertTaskAuditWithBLOBs" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="org.com.zhump.dsp.entity.DspAdvertTaskAuditWithBLOBs" extends="BaseResultMap" >
     <result column="AD_CONTENT" property="adContent" jdbcType="LONGVARCHAR" />
     <result column="PARAM_DESC" property="paramDesc" jdbcType="LONGVARCHAR" />
   </resultMap>
@@ -110,7 +110,7 @@
   <sql id="Blob_Column_List" >
     AD_CONTENT, PARAM_DESC
   </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditExample" >
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="org.com.zhump.dsp.entity.DspAdvertTaskAuditExample" >
     select
     <if test="distinct" >
       distinct
@@ -126,7 +126,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.com.zhump.dsp.entity.DspAdvertTaskAuditExample" >
     select
     <if test="distinct" >
       distinct
@@ -152,14 +152,14 @@
     delete from dsp_advert_task_audit
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditExample" >
+  <delete id="deleteByExample" parameterType="org.com.zhump.dsp.entity.DspAdvertTaskAuditExample" >
     delete from dsp_advert_task_audit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
 
-  <insert id="insertSelective" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditWithBLOBs" >
+  <insert id="insertSelective" parameterType="org.com.zhump.dsp.entity.DspAdvertTaskAuditWithBLOBs" >
     insert into dsp_advert_task_audit
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -388,7 +388,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="org.com.zhump.dsp.entity.DspAdvertTaskAuditExample" resultType="java.lang.Integer" >
     select count(*) from dsp_advert_task_audit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -513,7 +513,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditWithBLOBs" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.com.zhump.dsp.entity.DspAdvertTaskAuditWithBLOBs" >
     update dsp_advert_task_audit
     <set >
       <if test="adId != null" >
@@ -627,7 +627,7 @@
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zhump.dsp.entity.DspAdvertTaskAuditWithBLOBs" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.com.zhump.dsp.entity.DspAdvertTaskAuditWithBLOBs" >
     update dsp_advert_task_audit
     set AD_ID = #{adId,jdbcType=VARCHAR},
       CORP_CODE = #{corpCode,jdbcType=VARCHAR},
