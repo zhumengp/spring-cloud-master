@@ -8,8 +8,6 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
-  main:
-    allow-bean-definition-overriding: true
   sleuth:
     enabled: false
 eureka:
