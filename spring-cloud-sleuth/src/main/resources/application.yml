@@ -4,7 +4,7 @@ spring:
   application:
     name: zipkin-server
   datasource:
-    url: jdbc:mysql://192.168.112.100:3306/mboss
+    url: jdbc:mysql://192.169.2.63:3306/zhump_blog
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
@@ -23,6 +23,6 @@ management:
     web:
       server:
         auto-time-requests: false
-#zipkin:
-#  storage:
-#    type: mysql
+zipkin:
+  storage:
+    type: mysql
