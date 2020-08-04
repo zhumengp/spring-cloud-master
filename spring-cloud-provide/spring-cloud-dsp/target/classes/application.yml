@@ -29,3 +29,11 @@ hystrix:
       execution:
         timeout:
           enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

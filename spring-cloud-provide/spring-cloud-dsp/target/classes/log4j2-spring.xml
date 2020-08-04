@@ -15,7 +15,6 @@
     </Properties>
 
     <appenders>
-
         <console name="Console" target="SYSTEM_OUT">
             <!--输出日志的格式-->
             <PatternLayout pattern="${LOG_PATTERN}"/>
@@ -70,7 +69,6 @@
             <DefaultRolloverStrategy max="15"/>
         </RollingFile>
         <Socket name="Logstash" host="10.10.203.21" port="5044" protocol="TCP">
-
             <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}" />
         </Socket>
     </appenders>

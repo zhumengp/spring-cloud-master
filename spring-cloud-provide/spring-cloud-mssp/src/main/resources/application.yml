@@ -3,14 +3,14 @@ server:
 spring:
   application:
     name: mssp-service-impl
-  zipkin:
-    base-url: http://127.0.0.1/9411/
-    enabled: true
-    sender:
-      type: web
-  sleuth:
-    sampler:
-      probability: 1.0
+#  zipkin:
+#    base-url: http://127.0.0.1/9411/
+#    enabled: true
+#    sender:
+#      type: web
+#  sleuth:
+#    sampler:
+#      probability: 1.0
 eureka:
   client:
     registerWithEureka: true
@@ -26,3 +26,14 @@ hystrix:
       execution:
         timeout:
           enabled: false
+management:
+  health:
+    db:
+      enabled: false
+  endpoints:
+      web:
+        exposure:
+          include: "*"
+  endpoint:
+    health:
+      show-details: always
