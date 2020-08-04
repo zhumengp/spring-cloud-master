@@ -44,6 +44,7 @@ public class AdvertTaskController {
             example.createCriteria().andAdIdEqualTo(ad_id);
             List<DspAdvertTaskWithBLOBs> list = dspAdvertTask.selectByExampleWithBLOBs(example);
             if (list != null && list.size() > 0){
+                log.info("====DSP请求任务详情查询接口:"+list.get(0));
                 return Result.ok(list.get(0));
             }
             return Result.wrap(ErrorEnum.DSP00000001.getCode(), ErrorEnum.DSP00000001.getMsg());

@@ -10,8 +10,8 @@
         <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
         <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
         <!-- 定义日志存储的路径 -->
-        <property name="FILE_PATH" value="F://var//dsp8011/log" />
-        <property name="FILE_NAME" value="dsp-service-impl" />
+        <property name="FILE_PATH" value="F://var//mssp9011//log" />
+        <property name="FILE_NAME" value="mssp" />
     </Properties>
 
     <appenders>
@@ -86,7 +86,7 @@
             <AppenderRef ref="Console"/>
         </Logger>
 
-        <root level="info">
+        <root level="debug">
             <appender-ref ref="Console"/>
             <appender-ref ref="Filelog"/>
             <appender-ref ref="RollingFileInfo"/>

@@ -2,14 +2,14 @@ server:
   port: 9411
 spring:
   application:
-    name: zipkin-server
-  datasource:
-    url: jdbc:mysql://192.169.2.63:3306/zhump_blog
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
-  sleuth:
-    enabled: false
+    name: zipkin_server
+#  datasource:
+#    url: jdbc:mysql://192.169.2.63:3306/zhump_blog
+#    username: root
+#    password: 123456
+#    driver-class-name: com.mysql.jdbc.Driver
+#  sleuth:
+#    enabled: false
 eureka:
   client:
     registerWithEureka: true
@@ -23,4 +23,11 @@ management:
         auto-time-requests: false
 zipkin:
   storage:
-    type: mysql
+    StorageComponent: elasticsearch
+    type: elasticsearch
+  elasticsearch:
+    hosts: 127.0.0.1:9200
+    cluster: elasticsearch
+    index: zipkin
+    index-shards: 5
+    index-replicas: 1

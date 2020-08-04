@@ -1,10 +1,10 @@
 package org.com.zhump.dsp.entity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class DspAdvertTaskWithBLOBs extends DspAdvertTask {
 
     /**
@@ -16,12 +16,4 @@ public class DspAdvertTaskWithBLOBs extends DspAdvertTask {
      * 指令描述
      */
     private String paramDesc;
-
-    @Override
-    public String toString() {
-        return "DspAdvertTaskWithBLOBs{" +
-                "adContent='" + adContent + '\'' +
-                ", paramDesc='" + paramDesc + '\'' +
-                '}';
-    }
 }
