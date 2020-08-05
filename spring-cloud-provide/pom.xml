@@ -41,7 +41,6 @@
         <dependency>
             <groupId>org.com.zhump</groupId>
             <artifactId>spring-cloud-common-base</artifactId>
-            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -85,7 +84,6 @@
         <dependency>
             <groupId>org.com.zhump</groupId>
             <artifactId>spring-cloud-common-config</artifactId>
-            <version>1.0</version>
         </dependency>
 
         <!--logstash-->

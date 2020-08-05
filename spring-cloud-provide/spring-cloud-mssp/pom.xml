@@ -17,6 +17,10 @@
             <artifactId>spring-cloud-dsp-api</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.com.zhump</groupId>
+            <artifactId>spring-cloud-db-mssp</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>mssp</finalName>

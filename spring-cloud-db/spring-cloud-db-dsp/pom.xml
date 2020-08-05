@@ -9,6 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <description>dsp数据库连接</description>
+
     <artifactId>spring-cloud-db-dsp</artifactId>
     <build>
         <finalName>db-dsp</finalName>

@@ -9,7 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <description>mssp数据库连接</description>
     <artifactId>spring-cloud-db-mssp</artifactId>
 
+    <build>
+        <finalName>db-mssp</finalName>
+    </build>
 
 </project>

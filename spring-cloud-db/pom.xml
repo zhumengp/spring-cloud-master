@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-cloud-db-dsp</module>
+        <module>spring-cloud-db-mssp</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
