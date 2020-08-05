@@ -9,9 +9,9 @@ eureka:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:
-    #��eureka���ұ������ƹرգ����з���崻�ʱ���ܸ���ʱ������ʱ�������
-    enable-self-preservation: false
-    eviction-interval-timer-in-ms: 2000
+    #开启自我保护模式
+    enable-self-preservation: true
+    eviction-interval-timer-in-ms: 6000
 server:
   port: 6011
 spring:

@@ -85,6 +85,15 @@
             <groupId>org.com.zhump</groupId>
             <artifactId>spring-cloud-common-config</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+
 
         <!--logstash-->
         <dependency>
