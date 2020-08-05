@@ -17,6 +17,9 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://127.0.0.1:6011/eureka/
+  instance:
+    lease-expiration-duration-in-seconds: 10
+    health-check-url-path: /actuator/health
 feign:
   hystrix:
     enabled: true

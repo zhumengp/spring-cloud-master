@@ -7,26 +7,26 @@
         <groupId>org.com.zhump</groupId>
         <version>1.0</version>
     </parent>
+    <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
-    <description>微服务监控模块</description>
 
-    <artifactId>spring-cloud-admin</artifactId>
+    <artifactId>spring-cloud-gateway</artifactId>
+    <description>微服务之服务网关</description>
 
     <dependencies>
         <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-server</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
     </dependencies>
 
-
     <build>
-        <finalName>spring-boot-admin-server</finalName>
+        <finalName>gateway</finalName>
     </build>
-
 
 </project>

@@ -19,7 +19,6 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://127.0.0.1:6011/eureka/
-
 feign:
   hystrix:
     enabled: true
