@@ -8,8 +8,8 @@ spring:
 #    username: root
 #    password: 123456
 #    driver-class-name: com.mysql.jdbc.Driver
-#  sleuth:
-#    enabled: false
+  sleuth:
+    enabled: false
 eureka:
   client:
     registerWithEureka: true
@@ -25,9 +25,9 @@ zipkin:
   storage:
     StorageComponent: elasticsearch
     type: elasticsearch
-  elasticsearch:
-    hosts: http://10.10.203.21:9200/
-    cluster: elasticsearchCluster
-    index: zipkin-server
-    index-shards: 5
-    index-replicas: 1
+    elasticsearch:
+      hosts: 127.0.0.1:9200
+      cluster: elasticsearch #Cluster
+      index: zipkin-server
+      index-shards: 5
+      index-replicas: 1

@@ -7,13 +7,11 @@ import lombok.extern.log4j.Log4j2;
 import org.com.zhump.enums.ErrorEnum;
 import org.com.zhump.mssp.entity.MsspUser;
 import org.com.zhump.mssp.service.IMsspUserService;
+import org.com.zhump.mssp.web.dto.MsspUserDTO;
 import org.com.zhump.result.BaseResult;
 import org.com.zhump.result.Result;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -43,5 +41,17 @@ public class MsspUserController {
             log.error("内部错误",e);
             return Result.error();
         }
+    }
+
+    /**
+     * 新增用户信息
+     * @param msspUserDTO
+     * @return
+     */
+    @RequestMapping(value = "/insert",method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST",value = "新增用户")
+    public BaseResult insert(@RequestBody  MsspUserDTO msspUserDTO){
+        boolean insert = msspUserService.insert(msspUserDTO);
+        return Result.ok(insert);
     }
 }
