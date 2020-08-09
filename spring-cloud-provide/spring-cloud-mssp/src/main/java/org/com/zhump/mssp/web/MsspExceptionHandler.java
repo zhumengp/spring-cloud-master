@@ -1,4 +1,4 @@
-package org.com.zhump.dsp.web;
+package org.com.zhump.mssp.web;
 
 import lombok.extern.log4j.Log4j2;
 import org.com.zhump.exception.BusinessException;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Log4j2
 @RestControllerAdvice
-public class DspExceptionHandler {
+public class MsspExceptionHandler {
 
 
     /**
@@ -26,7 +26,7 @@ public class DspExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public BaseResult businessException(BusinessException e) {
-        log.error("DSP业务异常={}", e.getMessage(), e);
+        log.error("Mssp业务异常={}", e.getMessage(), e);
         return Result.wrap(e.getCode() == 0 ? BaseResult.ERROR_CODE : e.getCode(), e.getMessage());
     }
 }

@@ -22,14 +22,14 @@ public class DspAdvertTaskFeignClient implements DspAdvertTaskFeignApi {
     private IDspAdvertTask dspAdvertTask;
 
     @Override
-    public BaseResult getByAdId(@PathVariable(value = "ad_id") String str) {
+    public BaseResult getByAdId(@PathVariable(value = "ad_id") String ad_id) {
+        log.info("进入广告平台-接口名称,getByAdId,查询ID:{}",ad_id);
         DspAdvertTaskExample example = new DspAdvertTaskExample();
-        example.createCriteria().andAdIdEqualTo(str);
+        example.createCriteria().andAdIdEqualTo(ad_id);
         List<DspAdvertTaskWithBLOBs> list = dspAdvertTask.selectByExampleWithBLOBs(example);
         if (list != null && list.size() > 0){
-            log.info("进入广告平台-getByAdId：查询任务数据 {}",list.get(0));
             return Result.ok(list.get(0));
         }
-        return Result.wrap(ErrorEnum.DSP00000001.getCode(), ErrorEnum.DSP00000001.getMsg());
+        return Result.wrap(ErrorEnum.DSP10000003.getCode(), ErrorEnum.DSP10000003.getMsg());
     }
 }

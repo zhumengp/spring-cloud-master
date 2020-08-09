@@ -1,19 +1,19 @@
 package org.com.zhump.dsp.web.controller;
 
+import org.apache.commons.lang.StringUtils;
 import org.com.zhump.dsp.entity.DspAdvertTaskExample;
 import org.com.zhump.dsp.entity.DspAdvertTaskWithBLOBs;
 import org.com.zhump.dsp.service.IDspAdvertTask;
+import org.com.zhump.dsp.web.dto.AdvertTaskAdd;
+import org.com.zhump.dsp.web.dto.AdvertTaskEditDTO;
 import org.com.zhump.dsp.web.dto.AdvertTaskListDTO;
 import io.swagger.annotations.*;
 import lombok.extern.log4j.Log4j2;
 import org.com.zhump.result.BaseResult;
-import org.com.zhump.enums.ErrorEnum;
 import org.com.zhump.result.Result;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -31,7 +31,7 @@ public class AdvertTaskController {
     private IDspAdvertTask dspAdvertTask;
 
     /**
-     *
+     *详情查询
      * @param ad_id
      * @return
      */
@@ -44,26 +44,82 @@ public class AdvertTaskController {
         example.createCriteria().andAdIdEqualTo(ad_id);
         List<DspAdvertTaskWithBLOBs> list = dspAdvertTask.selectByExampleWithBLOBs(example);
         if (list != null && list.size() > 0){
-            log.info("====DSP请求任务详情查询接口:"+list.get(0).toString());
             return Result.ok(list.get(0));
         }
         return Result.ok();
 
     }
 
+    /**
+     * 列表查询
+     * @param advertTaskListDTO
+     * @return
+     */
     @RequestMapping(value = "/list/",method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET",value = "任务列表查询")
     @ApiResponses(@ApiResponse(code = 200,message = "操作成功",response = DspAdvertTaskWithBLOBs.class))
-    public BaseResult list(AdvertTaskListDTO advertTaskListDTO){
-        try {
-            DspAdvertTaskExample example = new DspAdvertTaskExample();
-            //example.createCriteria().andAdThemeLike("%"+advertTaskListDTO.getAd_theme()+"%");
-            List<DspAdvertTaskWithBLOBs> list = dspAdvertTask.selectByExampleWithBLOBs(example);
-            return Result.ok(list);
-        }catch (Exception e){
-            log.error("内部错误",e);
-            return Result.error();
+    public BaseResult list(@RequestBody  AdvertTaskListDTO advertTaskListDTO){
+        DspAdvertTaskExample example = new DspAdvertTaskExample();
+        DspAdvertTaskExample.Criteria criteria =  example.createCriteria();
+        if (advertTaskListDTO.getAdAudit() != null){
+            criteria.andAuditStateEqualTo(advertTaskListDTO.getAdAudit());
         }
+        if (StringUtils.isNotBlank(advertTaskListDTO.getAdTheme())){
+            example.or().andAdThemeLike("%"+advertTaskListDTO.getAdAudit()+"%");
+        }
+
+        List<DspAdvertTaskWithBLOBs> list = dspAdvertTask.selectByExampleWithBLOBs(example);
+        return Result.ok(list);
+    }
+
+    /**
+     * 编辑状态
+     * @param
+     */
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST",value = "编辑基本信息")
+    public BaseResult edit(@RequestBody AdvertTaskEditDTO advertTaskEditDTO){
+        log.info("编辑任务ID：{}",advertTaskEditDTO.getAd_id());
+        DspAdvertTaskExample example = new DspAdvertTaskExample();
+        DspAdvertTaskWithBLOBs dspAdvertTaskWithBLOBs = new DspAdvertTaskWithBLOBs();
+        example.createCriteria().andAdIdEqualTo(advertTaskEditDTO.getAd_id());
+        dspAdvertTaskWithBLOBs.setAdState(advertTaskEditDTO.getAd_state());
+        dspAdvertTaskWithBLOBs.setAdTheme(advertTaskEditDTO.getAd_theme());
+        dspAdvertTask.updateByExampleSelective(dspAdvertTaskWithBLOBs,example);
+        return Result.ok();
+    }
+
+    /**
+     * 删除任务
+     * @param ad_id 任务ID
+     */
+    @RequestMapping(value = "/delete/{ad_id}",method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST",value = "删除任务信息")
+    public BaseResult delete(@PathVariable(value = "ad_id")String ad_id){
+        log.info("删除任务ID：{}",ad_id);
+        DspAdvertTaskExample example = new DspAdvertTaskExample();
+        example.createCriteria().andAdIdEqualTo(ad_id);
+        int i = dspAdvertTask.deleteByExample(example);
+        if (i > 0){
+            return Result.ok();
+        }
+        return Result.error();
+    }
+
+    /**
+     * 新增任务
+     * @param advertTaskAdd 新增参数
+     */
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST",value = "新增任务")
+    public BaseResult add(@RequestBody AdvertTaskAdd advertTaskAdd){
+        DspAdvertTaskWithBLOBs recod = new DspAdvertTaskWithBLOBs();
+        BeanUtils.copyProperties(advertTaskAdd,recod);
+        int i = dspAdvertTask.insertSelective(recod);
+        if (i > 0 ){
+            return Result.ok();
+        }
+        return Result.error();
     }
 
 

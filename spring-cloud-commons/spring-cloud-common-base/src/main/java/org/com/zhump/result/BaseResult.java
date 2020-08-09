@@ -27,8 +27,8 @@ public class BaseResult<T>  implements Serializable {
     /**
      * public response error_msg
      */
-    public static final int ERROR_CODE = 500;
-    public static final String ERROR_MSG = "内部错误";
+    public static final int ERROR_CODE = 201;
+    public static final String ERROR_MSG = "操作失败";
 
     /**
      * 参数校验统一返回

@@ -6,14 +6,18 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.com.zhump.enums.ErrorEnum;
 import org.com.zhump.mssp.entity.MsspUser;
+import org.com.zhump.mssp.entity.MsspUserExample;
 import org.com.zhump.mssp.service.IMsspUserService;
 import org.com.zhump.mssp.web.dto.MsspUserDTO;
 import org.com.zhump.result.BaseResult;
 import org.com.zhump.result.Result;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Log4j2
@@ -26,7 +30,7 @@ public class MsspUserController {
     private IMsspUserService msspUserService;
 
     /**
-     *
+     *根据用户Id 查询用户信息
      * @param userId
      * @return
      */
@@ -34,24 +38,51 @@ public class MsspUserController {
     @ApiOperation(httpMethod = "GET",value = "根据用户ID查询详情",response = MsspUser.class)
     @ApiImplicitParam(name = "userId",value = "用户ID")
     public BaseResult<MsspUser> getByUserId(@PathVariable(value = "userId") Long userId){
-        try {
-            MsspUser user = msspUserService.getByUserId(userId);
-            return Result.ok(user);
-        }catch (Exception e){
-            log.error("内部错误",e);
-            return Result.error();
-        }
+        MsspUser user = msspUserService.selectByPrimaryKey(userId);
+        return Result.ok(user);
     }
 
     /**
      * 新增用户信息
-     * @param msspUserDTO
+     * @param msspUserDTO 新增参数
      * @return
      */
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST",value = "新增用户")
     public BaseResult insert(@RequestBody  MsspUserDTO msspUserDTO){
-        boolean insert = msspUserService.insert(msspUserDTO);
-        return Result.ok(insert);
+        MsspUser recod = new MsspUser();
+        BeanUtils.copyProperties(msspUserDTO,recod);
+        int result = msspUserService.insertSelective(recod);
+        if (result > 0){
+            return Result.ok();
+        }
+        return Result.error();
     }
+
+    /**
+     * 删除用户
+     * @param userId 用户ID
+     */
+    @RequestMapping(value = "/delete/{userId}",method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST",value = "删除用户")
+    public BaseResult delete(@PathVariable(value = "userId") Long userId){
+        int delete = msspUserService.deleteByPrimaryKey(userId);
+        if (delete > 0){
+            return Result.ok();
+        }
+        return Result.error();
+    }
+
+    /**
+     * 查询用户信息
+     * @return
+     */
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @ApiOperation(httpMethod = "GET",value = "删除用户")
+    public BaseResult list(){
+        MsspUserExample example = new MsspUserExample();
+        List<MsspUser> msspUsers = msspUserService.selectByExample(example);
+        return Result.ok(msspUsers);
+    }
+
 }

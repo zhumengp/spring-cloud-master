@@ -9,5 +9,8 @@ import lombok.Data;
 public class AdvertTaskListDTO {
 
     @ApiModelProperty(value = "广告主题")
-    private String ad_theme;
+    private String adTheme;
+
+    @ApiModelProperty(value = "广告审核状态")
+    private Integer adAudit;
 }

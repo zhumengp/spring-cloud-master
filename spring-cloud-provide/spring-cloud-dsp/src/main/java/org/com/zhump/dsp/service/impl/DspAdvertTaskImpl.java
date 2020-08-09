@@ -50,7 +50,7 @@ public class DspAdvertTaskImpl implements IDspAdvertTask {
         List<DspAdvertTaskWithBLOBs> list = dspAdvertTaskMapper.selectByExampleWithBLOBs(example);
         if (list == null || list.size() == 0){
             log.error("未查询到广告数据");
-            throw new DspBusinessException(ErrorEnum.DSP10000001,"未查询到数据");
+            throw new DspBusinessException(ErrorEnum.DSP10000001);
         }
         return list;
     }
