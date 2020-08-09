@@ -11,29 +11,29 @@ import java.io.Serializable;
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public enum ErrorEnum implements Serializable {
 
+    DSP10000001(10000001,"未查询到数据"),
+    DSP10000002(10000002,"操作失败"),
+    DSP10000003(10000003,"DSP广告平台异常"),
 
-    DSP00000001("00000001","操作失败"),
-    DSP00000002("00000002","DSP广告平台异常"),
-
-
-    MSSP00000001("00000001","操作失败"),
-    MSSP00000002("00000002","MSSP运营管理平台异常")
+    MSSP10000001(10000001,"未查询到数据"),
+    MSSP10000002(10000002,"操作失败"),
+    MSSP10000003(10000003,"MSSP运营管理平台异常")
     ;
 
-    private String code;
+    private int code;
 
     private String msg;
 
-    ErrorEnum(String code, String msg) {
+    ErrorEnum(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

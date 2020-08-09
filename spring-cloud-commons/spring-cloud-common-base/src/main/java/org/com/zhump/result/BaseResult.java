@@ -20,26 +20,26 @@ public class BaseResult<T>  implements Serializable {
     /**
      * public response code
      */
-    public static final String SUCCESS_CODE = "200";
+    public static final int SUCCESS_CODE = 200;
     public static final String SUCCESS_MSG = "操作成功";
 
 
     /**
      * public response error_msg
      */
-    public static final String ERROR_CODE = "500";
+    public static final int ERROR_CODE = 500;
     public static final String ERROR_MSG = "内部错误";
 
     /**
      * 参数校验统一返回
      * */
-    public static final String PARAMS_CODE = "400";
+    public static final int PARAMS_CODE = 400;
     public static final String PARAMS_MSG = "非法参数";
 
 
 
     /**编码*/
-    private String code;
+    private int code;
     /**返回描述*/
     private String msg;
     /**返回数据*/
@@ -49,16 +49,16 @@ public class BaseResult<T>  implements Serializable {
         this(SUCCESS_CODE,SUCCESS_MSG);
     }
 
-    public BaseResult(String code, String msg){
+    public BaseResult(int code, String msg){
        this(code,msg,null);
     }
 
-    public BaseResult(String code, String msg, T data) {
+    public BaseResult(int code, String msg, T data) {
         super();
         this.code(code).msg(msg).data(data);
     }
 
-    private BaseResult<T> code(String code) {
+    private BaseResult<T> code(int code) {
         this.setCode(code);
         return this;
     }

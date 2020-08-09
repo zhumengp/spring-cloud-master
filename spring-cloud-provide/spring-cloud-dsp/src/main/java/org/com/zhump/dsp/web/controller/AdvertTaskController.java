@@ -39,19 +39,16 @@ public class AdvertTaskController {
     @ApiOperation(httpMethod = "GET",value = "根据广告ID查询任务详情",response = DspAdvertTaskWithBLOBs.class)
     @ApiImplicitParam(name = "ad_id",value = "任务ID")
     public BaseResult<DspAdvertTaskWithBLOBs> getById(@PathVariable(value = "ad_id") String ad_id){
-        try {
-            DspAdvertTaskExample example = new DspAdvertTaskExample();
-            example.createCriteria().andAdIdEqualTo(ad_id);
-            List<DspAdvertTaskWithBLOBs> list = dspAdvertTask.selectByExampleWithBLOBs(example);
-            if (list != null && list.size() > 0){
-                log.info("====DSP请求任务详情查询接口:"+list.get(0).toString());
-                return Result.ok(list.get(0));
-            }
-            return Result.wrap(ErrorEnum.DSP00000001.getCode(), ErrorEnum.DSP00000001.getMsg());
-        }catch (Exception e){
-            log.error("内部错误",e);
-            return Result.error();
+        log.info("查询广告任务详情ID为,ad_id:{}",ad_id);
+        DspAdvertTaskExample example = new DspAdvertTaskExample();
+        example.createCriteria().andAdIdEqualTo(ad_id);
+        List<DspAdvertTaskWithBLOBs> list = dspAdvertTask.selectByExampleWithBLOBs(example);
+        if (list != null && list.size() > 0){
+            log.info("====DSP请求任务详情查询接口:"+list.get(0).toString());
+            return Result.ok(list.get(0));
         }
+        return Result.ok();
+
     }
 
     @RequestMapping(value = "/list/",method = RequestMethod.GET)

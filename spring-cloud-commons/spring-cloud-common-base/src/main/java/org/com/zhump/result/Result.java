@@ -24,7 +24,7 @@ public class Result {
 	 *
 	 * @return the wrapper
 	 */
-	public static <E> BaseResult<E> wrap(String code, String msg, E o) {
+	public static <E> BaseResult<E> wrap(int code, String msg, E o) {
 		return new BaseResult<>(code, msg, o);
 	}
 
@@ -37,7 +37,7 @@ public class Result {
 	 *
 	 * @return the wrapper
 	 */
-	public static <E> BaseResult<E> wrap(String code, String message) {
+	public static <E> BaseResult<E> wrap(int code, String message) {
 		return wrap(code, message, null);
 	}
 
@@ -49,7 +49,7 @@ public class Result {
 	 *
 	 * @return the wrapper
 	 */
-	public static <E> BaseResult<E> wrap(String code) {
+	public static <E> BaseResult<E> wrap(int code) {
 		return wrap(code, null);
 	}
 
