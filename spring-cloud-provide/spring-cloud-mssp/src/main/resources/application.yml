@@ -2,11 +2,11 @@ server:
   port: 9011
 spring:
   application:
-    name: mssp-service-impl
+    name: mssp
   profiles:
     active: msspDev
   zipkin:
-    base-url: http://127.0.0.1/9411/
+    base-url: http://127.0.0.1:9411/
     enabled: true
     sender:
       type: web

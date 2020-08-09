@@ -14,6 +14,6 @@ public class DspAdvertTaskFeignHystrix implements DspAdvertTaskFeignApi {
 
     @Override
     public BaseResult getByAdId(String ad_id) {
-        return Result.wrap(ErrorEnum.DSP00000002.getCode(),ErrorEnum.DSP00000002.getMsg());
+        return Result.wrap(ErrorEnum.DSP10000003.getCode(),ErrorEnum.DSP10000003.getMsg());
     }
 }

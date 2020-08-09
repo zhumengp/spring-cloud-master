@@ -65,6 +65,7 @@ public class MsspUserController {
      */
     @RequestMapping(value = "/delete/{userId}",method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST",value = "删除用户")
+    @ApiImplicitParam(name = "userId",value = "用户ID")
     public BaseResult delete(@PathVariable(value = "userId") Long userId){
         int delete = msspUserService.deleteByPrimaryKey(userId);
         if (delete > 0){

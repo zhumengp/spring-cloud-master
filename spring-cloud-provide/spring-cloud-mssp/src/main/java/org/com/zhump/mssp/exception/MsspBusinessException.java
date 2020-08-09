@@ -8,13 +8,13 @@ import org.com.zhump.exception.BusinessException;
 public class MsspBusinessException extends BusinessException {
 
     /**
-     * Instantiates a new Uac rpc exception.
+     * Instantiates a new MsspBusinessException rpc exception.
      */
     public MsspBusinessException() {
     }
 
     /**
-     * Instantiates a new Uac rpc exception.
+     * Instantiates a new MsspBusinessException rpc exception.
      *
      * @param code      the code
      * @param msgFormat the msg format
@@ -26,7 +26,7 @@ public class MsspBusinessException extends BusinessException {
     }
 
     /**
-     * Instantiates a new Uac rpc exception.
+     * Instantiates a new MsspBusinessException rpc exception.
      *
      * @param code the code
      * @param msg  the msg
@@ -37,7 +37,7 @@ public class MsspBusinessException extends BusinessException {
     }
 
     /**
-     * Instantiates a new Mdc rpc exception.
+     * Instantiates a new MsspBusinessException rpc exception.
      *
      * @param codeEnum the code enum
      */
@@ -47,7 +47,7 @@ public class MsspBusinessException extends BusinessException {
     }
 
     /**
-     * Instantiates a new Mdc rpc exception.
+     * Instantiates a new MsspBusinessException rpc exception.
      *
      * @param codeEnum the code enum
      * @param args     the args
