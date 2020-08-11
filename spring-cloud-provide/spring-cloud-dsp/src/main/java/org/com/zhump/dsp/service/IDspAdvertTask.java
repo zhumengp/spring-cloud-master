@@ -16,7 +16,7 @@ public interface IDspAdvertTask {
     /**根据ID删除*/
     int deleteByPrimaryKey(Integer id);
     /**新增*/
-    int insertSelective(DspAdvertTaskWithBLOBs record);
+    boolean insertSelective(DspAdvertTaskWithBLOBs record);
 
     List<DspAdvertTaskWithBLOBs> selectByExampleWithBLOBs(DspAdvertTaskExample example);
 

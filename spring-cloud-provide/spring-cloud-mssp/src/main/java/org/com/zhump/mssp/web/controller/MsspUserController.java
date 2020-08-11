@@ -1,8 +1,12 @@
 package org.com.zhump.mssp.web.controller;
 
+import com.baidu.unbiz.fluentvalidator.ComplexResult;
+import com.baidu.unbiz.fluentvalidator.FluentValidator;
+import com.baidu.unbiz.fluentvalidator.ResultCollectors;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.log4j.Log4j2;
 import org.com.zhump.enums.ErrorEnum;
 import org.com.zhump.mssp.entity.MsspUser;
@@ -11,12 +15,12 @@ import org.com.zhump.mssp.service.IMsspUserService;
 import org.com.zhump.mssp.web.dto.MsspUserDTO;
 import org.com.zhump.result.BaseResult;
 import org.com.zhump.result.Result;
+import org.com.zhump.validator.NotNullValidator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -38,20 +42,21 @@ public class MsspUserController {
     @ApiOperation(httpMethod = "GET",value = "根据用户ID查询详情",response = MsspUser.class)
     @ApiImplicitParam(name = "userId",value = "用户ID")
     public BaseResult<MsspUser> getByUserId(@PathVariable(value = "userId") Long userId){
+        log.info("查询用户数据ID：{}",userId);
         MsspUser user = msspUserService.selectByPrimaryKey(userId);
         return Result.ok(user);
     }
 
     /**
      * 新增用户信息
-     * @param msspUserDTO 新增参数
+     * @param msspUserDto 新增参数
      * @return
      */
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST",value = "新增用户")
-    public BaseResult insert(@RequestBody  MsspUserDTO msspUserDTO){
+    public BaseResult insert(@ApiParam(name = "msspUserDto", value = "新增用户Dto")@RequestBody  MsspUserDTO msspUserDto){
         MsspUser recod = new MsspUser();
-        BeanUtils.copyProperties(msspUserDTO,recod);
+        BeanUtils.copyProperties(msspUserDto,recod);
         int result = msspUserService.insertSelective(recod);
         if (result > 0){
             return Result.ok();
@@ -63,10 +68,19 @@ public class MsspUserController {
      * 删除用户
      * @param userId 用户ID
      */
-    @RequestMapping(value = "/delete/{userId}",method = RequestMethod.POST)
-    @ApiOperation(httpMethod = "POST",value = "删除用户")
-    @ApiImplicitParam(name = "userId",value = "用户ID")
-    public BaseResult delete(@PathVariable(value = "userId") Long userId){
+    @RequestMapping(value = "/delete/{userId}",method = RequestMethod.DELETE)
+    @ApiOperation(httpMethod = "DELETE",value = "删除用户")
+
+    public BaseResult delete(@ApiParam(name = "userId",value = "用户ID") @PathVariable(value = "userId") Long userId,
+                             @ApiParam(name = "test",value = "test")String test){
+        log.info("删除用户数据ID：{}",userId);
+        ComplexResult result = FluentValidator.checkAll()
+                .on(test, new NotNullValidator("测试"))
+                .doValidate()
+                .result(ResultCollectors.toComplex());
+        if (!result.isSuccess()){
+            return Result.wrap(ErrorEnum.DSP10000002.getCode(),ErrorEnum.DSP10000002.getMsg(),result.getErrors());
+        }
         int delete = msspUserService.deleteByPrimaryKey(userId);
         if (delete > 0){
             return Result.ok();
@@ -79,7 +93,7 @@ public class MsspUserController {
      * @return
      */
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    @ApiOperation(httpMethod = "GET",value = "删除用户")
+    @ApiOperation(httpMethod = "GET",value = "获取用户信息")
     public BaseResult list(){
         MsspUserExample example = new MsspUserExample();
         List<MsspUser> msspUsers = msspUserService.selectByExample(example);

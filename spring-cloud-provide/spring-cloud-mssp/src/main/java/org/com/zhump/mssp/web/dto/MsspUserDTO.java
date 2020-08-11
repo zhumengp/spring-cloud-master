@@ -11,12 +11,12 @@ import lombok.Setter;
 @ApiModel(value = "新增用户参数")
 public class MsspUserDTO {
 
-    @ApiModelProperty(name = "用户名")
+    @ApiModelProperty(value = "用户名")
     private String name;
-    @ApiModelProperty(name = "登录账户")
+    @ApiModelProperty(value = "登录账户")
     private String accountName;
-    @ApiModelProperty(name = "登录密码")
+    @ApiModelProperty(value = "登录密码")
     private String password;
-    @ApiModelProperty(name = "手机号")
+    @ApiModelProperty(value = "手机号")
     private String phone;
 }

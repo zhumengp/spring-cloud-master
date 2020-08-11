@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface DspAdvertAreasMapper {
+
     int countByExample(DspAdvertAreasExample example);
 
     int deleteByExample(DspAdvertAreasExample example);

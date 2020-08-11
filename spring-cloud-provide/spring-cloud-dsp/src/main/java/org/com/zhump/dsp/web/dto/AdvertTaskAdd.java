@@ -37,5 +37,7 @@ public class AdvertTaskAdd {
     private String qualityIds;
     @ApiModelProperty(value = "是否营销")
     private Integer market;
+    @ApiModelProperty(value = "广告内容")
+    private String adContent;
 
 }

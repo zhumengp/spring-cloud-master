@@ -1,5 +1,9 @@
 package org.com.zhump.dsp.web.controller;
 
+import com.baidu.unbiz.fluentvalidator.ComplexResult;
+import com.baidu.unbiz.fluentvalidator.FluentValidator;
+import com.baidu.unbiz.fluentvalidator.ResultCollector;
+import com.baidu.unbiz.fluentvalidator.ResultCollectors;
 import org.apache.commons.lang.StringUtils;
 import org.com.zhump.dsp.entity.DspAdvertTaskExample;
 import org.com.zhump.dsp.entity.DspAdvertTaskWithBLOBs;
@@ -9,8 +13,11 @@ import org.com.zhump.dsp.web.dto.AdvertTaskEditDTO;
 import org.com.zhump.dsp.web.dto.AdvertTaskListDTO;
 import io.swagger.annotations.*;
 import lombok.extern.log4j.Log4j2;
+import org.com.zhump.enums.ErrorEnum;
 import org.com.zhump.result.BaseResult;
 import org.com.zhump.result.Result;
+import org.com.zhump.validator.LengthValidator;
+import org.com.zhump.validator.NotNullValidator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -93,9 +100,16 @@ public class AdvertTaskController {
      * 删除任务
      * @param ad_id 任务ID
      */
-    @RequestMapping(value = "/delete/{ad_id}",method = RequestMethod.POST)
-    @ApiOperation(httpMethod = "POST",value = "删除任务信息")
+    @RequestMapping(value = "/delete/{ad_id}",method = RequestMethod.DELETE)
+    @ApiOperation(httpMethod = "DELETE",value = "删除任务信息")
     public BaseResult delete(@PathVariable(value = "ad_id")String ad_id){
+        ComplexResult result = FluentValidator.checkAll()
+                .on(ad_id,new NotNullValidator("主题"))
+                .doValidate()
+                .result(ResultCollectors.toComplex());
+        if (!result.isSuccess()){
+            return Result.wrap(ErrorEnum.DSP10000002.getCode(),ErrorEnum.DSP10000002.getMsg(),result.getErrors());
+        }
         log.info("删除任务ID：{}",ad_id);
         DspAdvertTaskExample example = new DspAdvertTaskExample();
         example.createCriteria().andAdIdEqualTo(ad_id);
@@ -113,10 +127,20 @@ public class AdvertTaskController {
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST",value = "新增任务")
     public BaseResult add(@RequestBody AdvertTaskAdd advertTaskAdd){
+        ComplexResult result = FluentValidator.checkAll()
+                .on(advertTaskAdd.getAdTheme(),new LengthValidator(1,20,"主题"))
+                .on(advertTaskAdd.getAdTheme(),new NotNullValidator("主题"))
+                .on(advertTaskAdd.getTemplateId(),new NotNullValidator("模板ID"))
+                .on(advertTaskAdd.getAdContent(),new NotNullValidator("广告内容"))
+                .doValidate()
+                .result(ResultCollectors.toComplex());
+        if (!result.isSuccess()){
+            return Result.wrap(ErrorEnum.DSP10000002.getCode(),ErrorEnum.DSP10000002.getMsg(),result.getErrors());
+        }
         DspAdvertTaskWithBLOBs recod = new DspAdvertTaskWithBLOBs();
         BeanUtils.copyProperties(advertTaskAdd,recod);
-        int i = dspAdvertTask.insertSelective(recod);
-        if (i > 0 ){
+        boolean b = dspAdvertTask.insertSelective(recod);
+        if (b){
             return Result.ok();
         }
         return Result.error();
