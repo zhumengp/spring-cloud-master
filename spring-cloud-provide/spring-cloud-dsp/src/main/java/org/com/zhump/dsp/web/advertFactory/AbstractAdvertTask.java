@@ -1,6 +1,6 @@
 package org.com.zhump.dsp.web.advertFactory;
 
-import org.com.zhump.dsp.web.dto.AdvertTaskAdd;
+import org.com.zhump.dsp.web.dto.AdvertTaskAddDTO;
 
 public abstract class AbstractAdvertTask {
 
@@ -9,5 +9,5 @@ public abstract class AbstractAdvertTask {
      * @param advertTaskAdd
      * @return
      */
-    public abstract boolean add(AdvertTaskAdd advertTaskAdd);
+    public abstract boolean add(AdvertTaskAddDTO advertTaskAdd);
 }

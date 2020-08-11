@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @ApiModel
-public class AdvertTaskAdd {
+public class AdvertTaskAddDTO {
 
     /**投放场景，多选流量主，以逗号隔开*/
     @ApiModelProperty(value = "多选流量主")

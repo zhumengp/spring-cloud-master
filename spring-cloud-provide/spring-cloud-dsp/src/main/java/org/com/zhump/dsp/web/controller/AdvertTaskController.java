@@ -2,13 +2,12 @@ package org.com.zhump.dsp.web.controller;
 
 import com.baidu.unbiz.fluentvalidator.ComplexResult;
 import com.baidu.unbiz.fluentvalidator.FluentValidator;
-import com.baidu.unbiz.fluentvalidator.ResultCollector;
 import com.baidu.unbiz.fluentvalidator.ResultCollectors;
 import org.apache.commons.lang.StringUtils;
 import org.com.zhump.dsp.entity.DspAdvertTaskExample;
 import org.com.zhump.dsp.entity.DspAdvertTaskWithBLOBs;
 import org.com.zhump.dsp.service.IDspAdvertTask;
-import org.com.zhump.dsp.web.dto.AdvertTaskAdd;
+import org.com.zhump.dsp.web.dto.AdvertTaskAddDTO;
 import org.com.zhump.dsp.web.dto.AdvertTaskEditDTO;
 import org.com.zhump.dsp.web.dto.AdvertTaskListDTO;
 import io.swagger.annotations.*;
@@ -18,7 +17,6 @@ import org.com.zhump.result.BaseResult;
 import org.com.zhump.result.Result;
 import org.com.zhump.validator.LengthValidator;
 import org.com.zhump.validator.NotNullValidator;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -135,7 +133,7 @@ public class AdvertTaskController {
      */
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST",value = "新增任务")
-    public BaseResult add(@RequestBody AdvertTaskAdd advertTaskAdd){
+    public BaseResult add(@RequestBody AdvertTaskAddDTO advertTaskAdd){
         ComplexResult result = FluentValidator.checkAll()
                 .on(advertTaskAdd.getAdvertTask().getAdTheme(),new LengthValidator(1,20,"主题"))
                 .on(advertTaskAdd.getAdvertTask().getAdTheme(),new NotNullValidator("主题"))

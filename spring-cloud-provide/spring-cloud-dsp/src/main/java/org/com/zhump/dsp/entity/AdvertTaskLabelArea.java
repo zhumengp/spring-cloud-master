@@ -16,6 +16,4 @@ public class AdvertTaskLabelArea {
     private String city;
     /**区*/
     private String regionCode;
-    /**详细地址*/
-    private String address;
 }

@@ -2,21 +2,18 @@ package org.com.zhump.dsp.service.impl;
 
 import lombok.extern.log4j.Log4j2;
 import org.com.zhump.dsp.dao.DspAdvertTaskMapper;
-import org.com.zhump.dsp.entity.DspAdvertAreas;
 import org.com.zhump.dsp.entity.DspAdvertTask;
 import org.com.zhump.dsp.entity.DspAdvertTaskExample;
 import org.com.zhump.dsp.entity.DspAdvertTaskWithBLOBs;
 import org.com.zhump.dsp.exception.DspBusinessException;
-import org.com.zhump.dsp.service.IDspAdvertAreas;
 import org.com.zhump.dsp.service.IDspAdvertTask;
-import org.com.zhump.dsp.web.dto.AdvertTaskAdd;
+import org.com.zhump.dsp.web.dto.AdvertTaskAddDTO;
 import org.com.zhump.enums.ErrorEnum;
 import org.com.zhump.util.SerialNumBuilderUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service(value = "IDspAdvertTask")
@@ -52,9 +49,9 @@ public class DspAdvertTaskImpl implements IDspAdvertTask {
      * @return
      */
     @Override
-    public boolean insertSelective(AdvertTaskAdd advertTaskAdd) {
+    public boolean insertSelective(AdvertTaskAddDTO advertTaskAdd) {
         String adId = SerialNumBuilderUtil.buildAdverSerial("");
-        AdvertTaskAdd.AdvertTask advertTask = advertTaskAdd.getAdvertTask();
+        AdvertTaskAddDTO.AdvertTask advertTask = advertTaskAdd.getAdvertTask();
         DspAdvertTaskWithBLOBs record = new DspAdvertTaskWithBLOBs();
         BeanUtils.copyProperties(advertTask,record);
         record.setAdId(adId);

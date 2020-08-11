@@ -2,7 +2,7 @@ package org.com.zhump.dsp.web.advertFactory;
 
 
 import lombok.extern.log4j.Log4j2;
-import org.com.zhump.dsp.web.dto.AdvertTaskAdd;
+import org.com.zhump.dsp.web.dto.AdvertTaskAddDTO;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,7 +14,7 @@ public class AdvertTaskTipsTag extends AbstractAdvertTask {
 
 
     @Override
-    public boolean add(AdvertTaskAdd advertTaskAdd) {
+    public boolean add(AdvertTaskAddDTO advertTaskAdd) {
         return false;
     }
 }
