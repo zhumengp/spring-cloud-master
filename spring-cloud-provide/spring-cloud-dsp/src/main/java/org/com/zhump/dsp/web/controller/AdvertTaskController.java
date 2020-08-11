@@ -59,22 +59,21 @@ public class AdvertTaskController {
 
     /**
      * 列表查询
-     * @param advertTaskListDTO
+     * @param advertTaskListDto
      * @return
      */
     @RequestMapping(value = "/list/",method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET",value = "任务列表查询")
-    @ApiResponses(@ApiResponse(code = 200,message = "操作成功",response = DspAdvertTaskWithBLOBs.class))
-    public BaseResult list(@RequestBody  AdvertTaskListDTO advertTaskListDTO){
+    //@ApiResponses(@ApiResponse(code = 200,message = "操作成功",response = DspAdvertTaskWithBLOBs.class))
+    public BaseResult list(@RequestBody  AdvertTaskListDTO advertTaskListDto){
         DspAdvertTaskExample example = new DspAdvertTaskExample();
         DspAdvertTaskExample.Criteria criteria =  example.createCriteria();
-        if (advertTaskListDTO.getAdAudit() != null){
-            criteria.andAuditStateEqualTo(advertTaskListDTO.getAdAudit());
+        if (advertTaskListDto.getAdAudit() != null){
+            criteria.andAuditStateEqualTo(advertTaskListDto.getAdAudit());
         }
-        if (StringUtils.isNotBlank(advertTaskListDTO.getAdTheme())){
-            example.or().andAdThemeLike("%"+advertTaskListDTO.getAdAudit()+"%");
+        if (StringUtils.isNotBlank(advertTaskListDto.getAdTheme())){
+            example.or().andAdThemeLike("%"+advertTaskListDto.getAdAudit()+"%");
         }
-
         List<DspAdvertTaskWithBLOBs> list = dspAdvertTask.selectByExampleWithBLOBs(example);
         return Result.ok(list);
     }
@@ -85,15 +84,25 @@ public class AdvertTaskController {
      */
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST",value = "编辑基本信息")
-    public BaseResult edit(@RequestBody AdvertTaskEditDTO advertTaskEditDTO){
-        log.info("编辑任务ID：{}",advertTaskEditDTO.getAd_id());
+    public BaseResult edit(@RequestBody AdvertTaskEditDTO advertTaskEditDto){
+        ComplexResult result = FluentValidator.checkAll()
+                .on(advertTaskEditDto.getAd_id(),new NotNullValidator("任务ID"))
+                .doValidate()
+                .result(ResultCollectors.toComplex());
+        if (!result.isSuccess()){
+            return Result.wrap(ErrorEnum.DSP10000002.getCode(),ErrorEnum.DSP10000002.getMsg(),result.getErrors());
+        }
+        log.info("编辑任务ID：{}",advertTaskEditDto.getAd_id());
         DspAdvertTaskExample example = new DspAdvertTaskExample();
         DspAdvertTaskWithBLOBs dspAdvertTaskWithBLOBs = new DspAdvertTaskWithBLOBs();
-        example.createCriteria().andAdIdEqualTo(advertTaskEditDTO.getAd_id());
-        dspAdvertTaskWithBLOBs.setAdState(advertTaskEditDTO.getAd_state());
-        dspAdvertTaskWithBLOBs.setAdTheme(advertTaskEditDTO.getAd_theme());
-        dspAdvertTask.updateByExampleSelective(dspAdvertTaskWithBLOBs,example);
-        return Result.ok();
+        example.createCriteria().andAdIdEqualTo(advertTaskEditDto.getAd_id());
+        dspAdvertTaskWithBLOBs.setAdState(advertTaskEditDto.getAd_state());
+        dspAdvertTaskWithBLOBs.setAdTheme(advertTaskEditDto.getAd_theme());
+        int i = dspAdvertTask.updateByExampleSelective(dspAdvertTaskWithBLOBs, example);
+        if (i > 0){
+            return Result.ok();
+        }
+        return Result.error();
     }
 
     /**
@@ -104,7 +113,7 @@ public class AdvertTaskController {
     @ApiOperation(httpMethod = "DELETE",value = "删除任务信息")
     public BaseResult delete(@PathVariable(value = "ad_id")String ad_id){
         ComplexResult result = FluentValidator.checkAll()
-                .on(ad_id,new NotNullValidator("主题"))
+                .on(ad_id,new NotNullValidator("任务ID"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()){
@@ -128,18 +137,16 @@ public class AdvertTaskController {
     @ApiOperation(httpMethod = "POST",value = "新增任务")
     public BaseResult add(@RequestBody AdvertTaskAdd advertTaskAdd){
         ComplexResult result = FluentValidator.checkAll()
-                .on(advertTaskAdd.getAdTheme(),new LengthValidator(1,20,"主题"))
-                .on(advertTaskAdd.getAdTheme(),new NotNullValidator("主题"))
-                .on(advertTaskAdd.getTemplateId(),new NotNullValidator("模板ID"))
-                .on(advertTaskAdd.getAdContent(),new NotNullValidator("广告内容"))
+                .on(advertTaskAdd.getAdvertTask().getAdTheme(),new LengthValidator(1,20,"主题"))
+                .on(advertTaskAdd.getAdvertTask().getAdTheme(),new NotNullValidator("主题"))
+                .on(advertTaskAdd.getAdvertTask().getTemplateId(),new NotNullValidator("模板ID"))
+                .on(advertTaskAdd.getAdvertTask().getAdContent(),new NotNullValidator("广告内容"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()){
             return Result.wrap(ErrorEnum.DSP10000002.getCode(),ErrorEnum.DSP10000002.getMsg(),result.getErrors());
         }
-        DspAdvertTaskWithBLOBs recod = new DspAdvertTaskWithBLOBs();
-        BeanUtils.copyProperties(advertTaskAdd,recod);
-        boolean b = dspAdvertTask.insertSelective(recod);
+        boolean b = dspAdvertTask.insertSelective(advertTaskAdd);
         if (b){
             return Result.ok();
         }

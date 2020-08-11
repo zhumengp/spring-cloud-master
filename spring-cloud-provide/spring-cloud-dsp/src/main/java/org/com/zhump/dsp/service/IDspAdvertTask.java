@@ -4,6 +4,7 @@ import org.com.zhump.dsp.entity.DspAdvertTask;
 import org.com.zhump.dsp.entity.DspAdvertTaskExample;
 import org.com.zhump.dsp.entity.DspAdvertTaskWithBLOBs;
 import org.apache.ibatis.annotations.Param;
+import org.com.zhump.dsp.web.dto.AdvertTaskAdd;
 
 import java.util.List;
 
@@ -13,10 +14,8 @@ public interface IDspAdvertTask {
     int countByExample(DspAdvertTaskExample example);
     /**根据指定参数删除*/
     int deleteByExample(DspAdvertTaskExample example);
-    /**根据ID删除*/
-    int deleteByPrimaryKey(Integer id);
     /**新增*/
-    boolean insertSelective(DspAdvertTaskWithBLOBs record);
+    boolean insertSelective(AdvertTaskAdd advertTaskAdd);
 
     List<DspAdvertTaskWithBLOBs> selectByExampleWithBLOBs(DspAdvertTaskExample example);
 

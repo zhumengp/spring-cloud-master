@@ -9,8 +9,10 @@ import org.com.zhump.dsp.entity.DspAdvertTaskWithBLOBs;
 import org.com.zhump.dsp.exception.DspBusinessException;
 import org.com.zhump.dsp.service.IDspAdvertAreas;
 import org.com.zhump.dsp.service.IDspAdvertTask;
+import org.com.zhump.dsp.web.dto.AdvertTaskAdd;
 import org.com.zhump.enums.ErrorEnum;
 import org.com.zhump.util.SerialNumBuilderUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +26,6 @@ public class DspAdvertTaskImpl implements IDspAdvertTask {
     @Autowired
     private DspAdvertTaskMapper dspAdvertTaskMapper;
 
-    @Autowired
-    private IDspAdvertAreas advertAreas;
-
     /**
      * 查询数量
      * @param example
@@ -37,35 +36,29 @@ public class DspAdvertTaskImpl implements IDspAdvertTask {
         return dspAdvertTaskMapper.countByExample(example);
     }
 
+    /**
+     * 删除任务
+     * @param example
+     * @return
+     */
     @Override
     public int deleteByExample(DspAdvertTaskExample example) {
-        return 0;
+        return dspAdvertTaskMapper.deleteByExample(example);
     }
 
+    /**
+     * 新增任务
+     * @param advertTaskAdd
+     * @return
+     */
     @Override
-    public int deleteByPrimaryKey(Integer id) {
-        return 0;
-    }
-
-    @Override
-    public boolean insertSelective(DspAdvertTaskWithBLOBs record) {
-        /**新增地域*/
-        List<DspAdvertAreas> areasList = new ArrayList<>();
-        DspAdvertAreas dspAdvertAreas = new DspAdvertAreas();
-        dspAdvertAreas.setAddress("test1");
-        dspAdvertAreas.setAdId(SerialNumBuilderUtil.buildAdverSerial(""));
-        dspAdvertAreas.setCity("test2");
-        dspAdvertAreas.setCoordinate("test3");
-        dspAdvertAreas.setCrowdId(123456L);
-        dspAdvertAreas.setScope(3L);
-        dspAdvertAreas.setProvince("");
-        dspAdvertAreas.setType(2);
-        dspAdvertAreas.setRegionCode("");
-        areasList.add(dspAdvertAreas);
-        Integer result = advertAreas.insertBatch(areasList);
-        if (result <= 0){
-            throw new DspBusinessException(ErrorEnum.DSP10000004);
-        }
+    public boolean insertSelective(AdvertTaskAdd advertTaskAdd) {
+        String adId = SerialNumBuilderUtil.buildAdverSerial("");
+        AdvertTaskAdd.AdvertTask advertTask = advertTaskAdd.getAdvertTask();
+        DspAdvertTaskWithBLOBs record = new DspAdvertTaskWithBLOBs();
+        BeanUtils.copyProperties(advertTask,record);
+        record.setAdId(adId);
+        record.setParamDesc("");
         int i = dspAdvertTaskMapper.insertSelective(record);
         if (i <= 0){
             throw new DspBusinessException(ErrorEnum.DSP10000004);
