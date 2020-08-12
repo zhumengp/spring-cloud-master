@@ -18,6 +18,7 @@ import org.com.zhump.result.Result;
 import org.com.zhump.validator.NotNullValidator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -32,6 +33,7 @@ public class MsspUserController {
 
     @Resource
     private IMsspUserService msspUserService;
+
 
     /**
      *根据用户Id 查询用户信息
@@ -72,8 +74,17 @@ public class MsspUserController {
         if (!re.isSuccess()){
             return Result.wrap(ErrorEnum.DSP10000002.getCode(),ErrorEnum.DSP10000002.getMsg(),re.getErrors());
         }
+        //查询账号是否相同
+        MsspUserExample example = new MsspUserExample();
+        example.createCriteria().andAccountNameEqualTo(msspUserDto.getAccountName());
+        List<MsspUser> msspUsers = msspUserService.selectByExample(example);
+        if (msspUsers != null && msspUsers.size() > 0){
+            return Result.wrap(ErrorEnum.MSSP10000002.getCode(),"账户名相同");
+        }
         MsspUser recod = new MsspUser();
         BeanUtils.copyProperties(msspUserDto,recod);
+        String md5 = DigestUtils.md5DigestAsHex((recod.getAccountName() + recod.getPassword()).getBytes());
+        recod.setPassword(md5);
         int result = msspUserService.insertSelective(recod);
         if (result > 0){
             return Result.ok();
@@ -90,13 +101,6 @@ public class MsspUserController {
 
     public BaseResult delete(@ApiParam(name = "userId",value = "用户ID") @PathVariable(value = "userId") Long userId){
         log.info("删除用户数据ID：{}",userId);
-        ComplexResult result = FluentValidator.checkAll()
-                .on(userId.toString(), new NotNullValidator("用户ID"))
-                .doValidate()
-                .result(ResultCollectors.toComplex());
-        if (!result.isSuccess()){
-            return Result.wrap(ErrorEnum.DSP10000002.getCode(),ErrorEnum.DSP10000002.getMsg(),result.getErrors());
-        }
         int delete = msspUserService.deleteByPrimaryKey(userId);
         if (delete > 0){
             return Result.ok();

@@ -1,6 +1,5 @@
 package org.com.zhump.mssp.web.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -19,4 +18,10 @@ public class MsspUserDTO {
     private String password;
     @ApiModelProperty(value = "手机号")
     private String phone;
+    @ApiModelProperty(value = "邮箱")
+    private String email;
+    @ApiModelProperty(value = "用户锁")
+    private Integer locked;
+    @ApiModelProperty(value = "性别")
+    private Integer sex;
 }
