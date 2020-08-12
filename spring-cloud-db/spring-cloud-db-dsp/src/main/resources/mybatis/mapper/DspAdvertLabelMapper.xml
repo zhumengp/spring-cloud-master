@@ -6,11 +6,9 @@
     <result column="AD_ID" property="adId" jdbcType="VARCHAR" />
     <result column="LABEL_ID" property="labelId" jdbcType="INTEGER" />
     <result column="TAG_VALUE_TYPE" property="tagValueType" jdbcType="INTEGER" />
-    <result column="MIN_VALUE" property="minValue" jdbcType="BIGINT" />
-    <result column="MAX_VALUE" property="maxValue" jdbcType="BIGINT" />
     <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="CROWD_ID" property="crowdId" jdbcType="BIGINT" />
+    <result column="CROWD_ID" property="crowdId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -104,16 +102,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.com.zhump.dsp.entity.DspAdvertLabel" >
-    insert into dsp_advert_label (ID, AD_ID, LABEL_ID, 
-      TAG_VALUE_TYPE, MIN_VALUE, MAX_VALUE, 
-      CREATE_TIME, UPDATE_TIME, CROWD_ID
-      )
-    values (#{id,jdbcType=BIGINT}, #{adId,jdbcType=VARCHAR}, #{labelId,jdbcType=INTEGER}, 
-      #{tagValueType,jdbcType=INTEGER}, #{minValue,jdbcType=BIGINT}, #{maxValue,jdbcType=BIGINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{crowdId,jdbcType=BIGINT}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="org.com.zhump.dsp.entity.DspAdvertLabel" >
     insert into dsp_advert_label
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -216,21 +204,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
-    update dsp_advert_label
-    set ID = #{record.id,jdbcType=BIGINT},
-      AD_ID = #{record.adId,jdbcType=VARCHAR},
-      LABEL_ID = #{record.labelId,jdbcType=INTEGER},
-      TAG_VALUE_TYPE = #{record.tagValueType,jdbcType=INTEGER},
-      MIN_VALUE = #{record.minValue,jdbcType=BIGINT},
-      MAX_VALUE = #{record.maxValue,jdbcType=BIGINT},
-      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
-      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
-      CROWD_ID = #{record.crowdId,jdbcType=BIGINT}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
+
   <update id="updateByPrimaryKeySelective" parameterType="org.com.zhump.dsp.entity.DspAdvertLabel" >
     update dsp_advert_label
     <set >
@@ -262,9 +236,7 @@
     where ID = #{id,jdbcType=BIGINT}
   </update>
 
-
-
-  <insert id="insertBatch" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertBatch" parameterType="map">
     insert into DSP_ADVERT_LABEL (AD_ID,LABEL_ID,CROWD_ID) values
     <foreach collection="items" item="item" index="index" separator=",">
       (

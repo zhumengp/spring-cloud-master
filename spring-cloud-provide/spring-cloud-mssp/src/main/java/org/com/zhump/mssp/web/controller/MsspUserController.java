@@ -41,8 +41,15 @@ public class MsspUserController {
     @RequestMapping(value = "/getByUserId/{userId}",method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET",value = "根据用户ID查询详情",response = MsspUser.class)
     @ApiImplicitParam(name = "userId",value = "用户ID")
-    public BaseResult<MsspUser> getByUserId(@PathVariable(value = "userId") Long userId){
+    public BaseResult getByUserId(@PathVariable(value = "userId") Long userId){
         log.info("查询用户数据ID：{}",userId);
+        ComplexResult result = FluentValidator.checkAll()
+                .on(userId.toString(), new NotNullValidator("用户ID"))
+                .doValidate()
+                .result(ResultCollectors.toComplex());
+        if (!result.isSuccess()){
+            return Result.wrap(ErrorEnum.DSP10000002.getCode(),ErrorEnum.DSP10000002.getMsg(),result.getErrors());
+        }
         MsspUser user = msspUserService.selectByPrimaryKey(userId);
         return Result.ok(user);
     }
@@ -55,6 +62,16 @@ public class MsspUserController {
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST",value = "新增用户")
     public BaseResult insert(@ApiParam(name = "msspUserDto", value = "新增用户Dto")@RequestBody  MsspUserDTO msspUserDto){
+        ComplexResult re = FluentValidator.checkAll()
+                .on(msspUserDto.getAccountName(), new NotNullValidator("账号"))
+                .on(msspUserDto.getName(),new NotNullValidator("用户名"))
+                .on(msspUserDto.getPassword(),new NotNullValidator("密码"))
+                .on(msspUserDto.getPhone(),new NotNullValidator("手机号"))
+                .doValidate()
+                .result(ResultCollectors.toComplex());
+        if (!re.isSuccess()){
+            return Result.wrap(ErrorEnum.DSP10000002.getCode(),ErrorEnum.DSP10000002.getMsg(),re.getErrors());
+        }
         MsspUser recod = new MsspUser();
         BeanUtils.copyProperties(msspUserDto,recod);
         int result = msspUserService.insertSelective(recod);
@@ -71,11 +88,10 @@ public class MsspUserController {
     @RequestMapping(value = "/delete/{userId}",method = RequestMethod.DELETE)
     @ApiOperation(httpMethod = "DELETE",value = "删除用户")
 
-    public BaseResult delete(@ApiParam(name = "userId",value = "用户ID") @PathVariable(value = "userId") Long userId,
-                             @ApiParam(name = "test",value = "test")String test){
+    public BaseResult delete(@ApiParam(name = "userId",value = "用户ID") @PathVariable(value = "userId") Long userId){
         log.info("删除用户数据ID：{}",userId);
         ComplexResult result = FluentValidator.checkAll()
-                .on(test, new NotNullValidator("测试"))
+                .on(userId.toString(), new NotNullValidator("用户ID"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()){

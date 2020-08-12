@@ -25,5 +25,7 @@ public interface DspAdvertAreasMapper {
 
     int updateByPrimaryKeySelective(DspAdvertAreas record);
 
-    Integer insertBatch(Map<String, Object> map);
+    Integer insertBatchAreas1(Map<String, Object> map);
+
+    Integer insertBatchAreas2(Map<String, Object> map);
 }

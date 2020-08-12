@@ -1,11 +1,15 @@
 package org.com.zhump.dsp.service.impl;
 
 import lombok.extern.log4j.Log4j2;
+import org.com.zhump.api.mode.dto.ApiAdvertTaskAddDTO;
+import org.com.zhump.api.mode.dto.ApiAdvertTaskAreasDTO;
 import org.com.zhump.dsp.dao.DspAdvertTaskMapper;
+import org.com.zhump.dsp.entity.DspAdvertAreas;
 import org.com.zhump.dsp.entity.DspAdvertTask;
 import org.com.zhump.dsp.entity.DspAdvertTaskExample;
 import org.com.zhump.dsp.entity.DspAdvertTaskWithBLOBs;
 import org.com.zhump.dsp.exception.DspBusinessException;
+import org.com.zhump.dsp.service.IDspAdvertAreas;
 import org.com.zhump.dsp.service.IDspAdvertTask;
 import org.com.zhump.dsp.web.dto.AdvertTaskAddDTO;
 import org.com.zhump.enums.ErrorEnum;
@@ -22,6 +26,9 @@ public class DspAdvertTaskImpl implements IDspAdvertTask {
 
     @Autowired
     private DspAdvertTaskMapper dspAdvertTaskMapper;
+
+    @Autowired
+    private IDspAdvertAreas dspAdvertAreas;
 
     /**
      * 查询数量
@@ -45,22 +52,26 @@ public class DspAdvertTaskImpl implements IDspAdvertTask {
 
     /**
      * 新增任务
-     * @param advertTaskAdd
+     * @param apiAdvertTaskAddDto
      * @return
      */
     @Override
-    public boolean insertSelective(AdvertTaskAddDTO advertTaskAdd) {
-        String adId = SerialNumBuilderUtil.buildAdverSerial("");
-        AdvertTaskAddDTO.AdvertTask advertTask = advertTaskAdd.getAdvertTask();
+    public boolean insertSelective(ApiAdvertTaskAddDTO apiAdvertTaskAddDto) {
         DspAdvertTaskWithBLOBs record = new DspAdvertTaskWithBLOBs();
-        BeanUtils.copyProperties(advertTask,record);
+        BeanUtils.copyProperties(apiAdvertTaskAddDto,record);
+        String adId = SerialNumBuilderUtil.buildAdverSerial("");
         record.setAdId(adId);
-        record.setParamDesc("");
         int i = dspAdvertTaskMapper.insertSelective(record);
-        if (i <= 0){
+        if ( i < 0){
+            return false;
+        }
+        List<ApiAdvertTaskAreasDTO> apiAdvertTaskAreasDtos = apiAdvertTaskAddDto.getApiAdvertTaskAreasDtos();
+        boolean b = dspAdvertAreas.insertBatchApi(adId, "123456",apiAdvertTaskAreasDtos);
+        if (!b){
+            log.error("新增地域标签失败,任务ID：{}",adId);
             throw new DspBusinessException(ErrorEnum.DSP10000004);
         }
-        return true;
+        return i > 0 ? true :false;
     }
     /**查询广告任务*/
     @Override
@@ -75,11 +86,6 @@ public class DspAdvertTaskImpl implements IDspAdvertTask {
 
     @Override
     public List<DspAdvertTask> selectByExample(DspAdvertTaskExample example) {
-        return null;
-    }
-
-    @Override
-    public DspAdvertTaskWithBLOBs selectByPrimaryKey(Integer id) {
         return null;
     }
 

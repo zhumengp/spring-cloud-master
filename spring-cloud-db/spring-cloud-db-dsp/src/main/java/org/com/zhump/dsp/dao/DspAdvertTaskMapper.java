@@ -25,8 +25,6 @@ public interface DspAdvertTaskMapper {
 
     List<DspAdvertTask> selectByExample(DspAdvertTaskExample example);
 
-    DspAdvertTaskWithBLOBs selectByPrimaryKey(Integer id);
-
     int updateByExampleSelective(@Param("record") DspAdvertTaskWithBLOBs record, @Param("example") DspAdvertTaskExample example);
 
     int updateByPrimaryKeySelective(DspAdvertTaskWithBLOBs record);

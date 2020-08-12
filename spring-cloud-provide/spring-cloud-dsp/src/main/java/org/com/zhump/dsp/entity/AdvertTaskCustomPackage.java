@@ -13,7 +13,7 @@ import java.util.Map;
  */
 @Getter
 @Setter
-public class AdvertCustomPackage implements Serializable {
+public class AdvertTaskCustomPackage implements Serializable {
 
     /**包名称*/
     private String  name;

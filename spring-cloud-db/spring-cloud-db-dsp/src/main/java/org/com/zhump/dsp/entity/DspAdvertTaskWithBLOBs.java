@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class DspAdvertTaskWithBLOBs extends DspAdvertTask {
 
+    private static final long serialVersionUID = -6201438845494146929L;
     /**
      * 广告内容
      */

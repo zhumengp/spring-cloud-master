@@ -252,7 +252,7 @@
   </update>
 
 
-  <insert id="insertBatch" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertBatchAreas1" parameterType="map" useGeneratedKeys="true" keyProperty="id">
   insert into DSP_ADVERT_AREAS
   (AD_ID,PROVINCE,CITY,REGION_CODE,ADDRESS,COORDINATE,SCOPE,TYPE,CROWD_ID)
   values
@@ -263,11 +263,24 @@
     #{item.city},
     #{item.regionCode},
     #{item.address},
-    #{item.coordinate},
-    #{item.scope},
-    #{item.type},
     #{item.crowdId}
     )
   </foreach>
+  </insert>
+
+
+  <insert id="insertBatchAreas2" parameterType="map" useGeneratedKeys="true" keyProperty="id">
+    insert into DSP_ADVERT_AREAS
+    (AD_ID,PROVINCE,CITY,REGION_CODE,ADDRESS,COORDINATE,SCOPE,TYPE,CROWD_ID)
+    values
+    <foreach collection="items" item="item" index="index" separator=",">
+      (
+      #{item.adId},
+      #{item.coordinate},
+      #{item.scope},
+      #{item.type},
+      #{item.crowdId}
+      )
+    </foreach>
   </insert>
 </mapper>

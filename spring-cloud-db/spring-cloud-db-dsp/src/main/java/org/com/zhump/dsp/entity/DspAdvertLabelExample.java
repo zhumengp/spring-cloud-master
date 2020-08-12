@@ -605,52 +605,52 @@ public class DspAdvertLabelExample {
             return (Criteria) this;
         }
 
-        public Criteria andCrowdIdEqualTo(Long value) {
+        public Criteria andCrowdIdEqualTo(String value) {
             addCriterion("CROWD_ID =", value, "crowdId");
             return (Criteria) this;
         }
 
-        public Criteria andCrowdIdNotEqualTo(Long value) {
+        public Criteria andCrowdIdNotEqualTo(String value) {
             addCriterion("CROWD_ID <>", value, "crowdId");
             return (Criteria) this;
         }
 
-        public Criteria andCrowdIdGreaterThan(Long value) {
+        public Criteria andCrowdIdGreaterThan(String value) {
             addCriterion("CROWD_ID >", value, "crowdId");
             return (Criteria) this;
         }
 
-        public Criteria andCrowdIdGreaterThanOrEqualTo(Long value) {
+        public Criteria andCrowdIdGreaterThanOrEqualTo(String value) {
             addCriterion("CROWD_ID >=", value, "crowdId");
             return (Criteria) this;
         }
 
-        public Criteria andCrowdIdLessThan(Long value) {
+        public Criteria andCrowdIdLessThan(String value) {
             addCriterion("CROWD_ID <", value, "crowdId");
             return (Criteria) this;
         }
 
-        public Criteria andCrowdIdLessThanOrEqualTo(Long value) {
+        public Criteria andCrowdIdLessThanOrEqualTo(String value) {
             addCriterion("CROWD_ID <=", value, "crowdId");
             return (Criteria) this;
         }
 
-        public Criteria andCrowdIdIn(List<Long> values) {
+        public Criteria andCrowdIdIn(List<String> values) {
             addCriterion("CROWD_ID in", values, "crowdId");
             return (Criteria) this;
         }
 
-        public Criteria andCrowdIdNotIn(List<Long> values) {
+        public Criteria andCrowdIdNotIn(List<String> values) {
             addCriterion("CROWD_ID not in", values, "crowdId");
             return (Criteria) this;
         }
 
-        public Criteria andCrowdIdBetween(Long value1, Long value2) {
+        public Criteria andCrowdIdBetween(String value1, String value2) {
             addCriterion("CROWD_ID between", value1, value2, "crowdId");
             return (Criteria) this;
         }
 
-        public Criteria andCrowdIdNotBetween(Long value1, Long value2) {
+        public Criteria andCrowdIdNotBetween(String value1, String value2) {
             addCriterion("CROWD_ID not between", value1, value2, "crowdId");
             return (Criteria) this;
         }

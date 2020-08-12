@@ -1,7 +1,6 @@
 package org.com.zhump.dsp.entity;
 
 
-import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +12,7 @@ import java.util.List;
  */
 @Setter
 @Getter
-public class CrowdPackage {
+public class AdvertTaskCrowdPackage {
 
 
     /**
@@ -33,6 +32,6 @@ public class CrowdPackage {
     /**广告任务地域人群包标签*/
     private List<AdvertTaskLabelCrowdArea> advertTaskLabelCrowdArea = new ArrayList<>();
     /**数盘对象集*/
-    private AdvertCustomPackage dpCustomPackage;
+    private AdvertTaskCustomPackage dpCustomPackage;
 
 }

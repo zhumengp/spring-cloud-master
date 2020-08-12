@@ -1,6 +1,7 @@
 package org.com.zhump.dsp.web;
 
 import lombok.extern.log4j.Log4j2;
+import org.com.zhump.enums.ErrorEnum;
 import org.com.zhump.exception.BusinessException;
 import org.com.zhump.result.BaseResult;
 import org.com.zhump.result.Result;
@@ -14,7 +15,20 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class DspExceptionHandler {
 
-
+    /**
+     * 参数非法异常.
+     *
+     * @param e the e
+     *
+     * @return the wrapper
+     */
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public BaseResult illegalArgumentException(IllegalArgumentException e) {
+        log.error("参数非法异常={}", e.getMessage(), e);
+        return Result.wrap(ErrorEnum.DSP19999999.getCode(), e.getMessage());
+    }
     /**
      * 业务异常.
      *
