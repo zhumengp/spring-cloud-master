@@ -18,6 +18,8 @@ public interface IDspAdvertTask {
     /**新增*/
     boolean insertSelective(ApiAdvertTaskAddDTO apiAdvertTaskAddDto);
 
+    boolean insertSelective(AdvertTaskAddDTO advertTaskAddDto);
+
     List<DspAdvertTaskWithBLOBs> selectByExampleWithBLOBs(DspAdvertTaskExample example);
 
     List<DspAdvertTask> selectByExample(DspAdvertTaskExample example);

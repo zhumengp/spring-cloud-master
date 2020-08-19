@@ -129,22 +129,22 @@ public class AdvertTaskController {
 
     /**
      * 新增任务
-     * @param advertTaskAdd 新增参数
+     * @param advertTaskAddDto 新增参数
      */
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST",value = "新增任务")
-    public BaseResult add(@RequestBody AdvertTaskAddDTO advertTaskAdd){
+    public BaseResult add(@RequestBody AdvertTaskAddDTO advertTaskAddDto){
         ComplexResult result = FluentValidator.checkAll()
-                .on(advertTaskAdd.getAdvertTask().getAdTheme(),new LengthValidator(1,20,"主题"))
-                .on(advertTaskAdd.getAdvertTask().getAdTheme(),new NotNullValidator("主题"))
-                .on(advertTaskAdd.getAdvertTask().getTemplateId(),new NotNullValidator("模板ID"))
-                .on(advertTaskAdd.getAdvertTask().getAdContent(),new NotNullValidator("广告内容"))
+                .on(advertTaskAddDto.getAdvertTask().getAdTheme(),new LengthValidator(1,20,"主题"))
+                .on(advertTaskAddDto.getAdvertTask().getAdTheme(),new NotNullValidator("主题"))
+                .on(advertTaskAddDto.getAdvertTask().getTemplateId(),new NotNullValidator("模板ID"))
+                .on(advertTaskAddDto.getAdvertTask().getAdContent(),new NotNullValidator("广告内容"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()){
             return Result.wrap(ErrorEnum.DSP10000002.getCode(),ErrorEnum.DSP10000002.getMsg(),result.getErrors());
         }
-        boolean b = dspAdvertTask.insertSelective(advertTaskAdd);
+        boolean b = dspAdvertTask.insertSelective(advertTaskAddDto);
         if (b){
             return Result.ok();
         }

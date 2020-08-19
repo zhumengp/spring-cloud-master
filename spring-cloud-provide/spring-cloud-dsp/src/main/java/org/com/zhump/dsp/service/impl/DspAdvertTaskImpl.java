@@ -73,6 +73,12 @@ public class DspAdvertTaskImpl implements IDspAdvertTask {
         }
         return i > 0 ? true :false;
     }
+
+    @Override
+    public boolean insertSelective(AdvertTaskAddDTO advertTaskAddDto) {
+        return false;
+    }
+
     /**查询广告任务*/
     @Override
     public List<DspAdvertTaskWithBLOBs> selectByExampleWithBLOBs(DspAdvertTaskExample example) {

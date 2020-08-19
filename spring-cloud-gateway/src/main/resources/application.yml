@@ -9,6 +9,13 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+      routes:
+        - id: mssp
+          uri: lb://mssp
+          predicates:
+            - Path=/mssp/**
+          filters:
+            - StripPrefix=1
 eureka:
   client:
     registerWithEureka: true

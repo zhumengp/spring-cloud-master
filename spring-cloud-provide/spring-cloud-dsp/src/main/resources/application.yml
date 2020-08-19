@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: dsp
+  profiles:
+    active: dspDev
   zipkin:
     base-url: http://127.0.0.1:9411/
     enabled: true
@@ -11,8 +13,6 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
-  profiles:
-    active: dspDev
 eureka:
   client:
     registerWithEureka: true

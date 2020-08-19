@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel(value = "新增用户参数")
-public class MsspUserDTO {
+public class MsspUserAddDTO {
 
     @ApiModelProperty(value = "用户名")
     private String name;
