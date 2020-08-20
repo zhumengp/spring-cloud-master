@@ -43,7 +43,7 @@ public class MyGatewayFilter implements GlobalFilter, Ordered {
         ServerHttpRequest request = exchange.getRequest().mutate()
                 .headers(httpHeaders -> httpHeaders.remove(GatewayConstant.SECRET_KEY))
                 .build();
-        ServerHttpRequest newRequest = request.mutate().header(GatewayConstant.SECRET_KEY,token).build();
+        ServerHttpRequest newRequest = request.mutate().headers(httpHeaders -> {httpHeaders.set(GatewayConstant.SECRET_KEY,token);}).build();
         return chain.filter(exchange.mutate().request(newRequest.mutate().build()).build());
 
     }
