@@ -29,14 +29,6 @@ import java.util.List;
 @EnableConfigurationProperties(ResourceProperties.class)
 public class SystemConfigure {
 
-	private List<ErrorViewResolver> errorViewResolvers;
-	private final ServerProperties serverProperties;
-	
-	public SystemConfigure(ServerProperties serverProperties, ObjectProvider<List<ErrorViewResolver>> errorViewResolversProvider) {
-		this.serverProperties = serverProperties;
-		this.errorViewResolvers = errorViewResolversProvider.getIfAvailable();
-	}
-
 	/**
 	 * 加载 过滤器
 	 * @return

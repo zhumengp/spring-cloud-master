@@ -28,7 +28,7 @@ import java.util.List;
 @RestController
 @Log4j2
 @RequestMapping(value = "/user")
-@Api(value = "MSSP - MsspUserController",tags = {"用户管理控制层"},produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(value = "MSSP - MsspUserController",tags = {"用户管理模块"},produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class MsspUserController {
 
 

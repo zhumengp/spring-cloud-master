@@ -20,6 +20,7 @@ public class GlobalInterceptor  implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
         String secretKey = request.getHeader(MsspConstant.SECRET_KEY);
+        log.info("请求地址:{}",request.getRequestURL());
         if(StringUtils.isNotBlank(secretKey)){
             String s = redisUtils.get(MsspConstant.SECRET_KEY);
             if (StringUtils.isNotBlank(s) && secretKey.equals(s)){
@@ -28,7 +29,7 @@ public class GlobalInterceptor  implements HandlerInterceptor {
         }
         response.setContentType("application/json; charset=utf-8");
         PrintWriter writer = response.getWriter();
-        writer.write("{\"code\":1999999,\"msg\":\"网关异常，请重试。。。。\",\"data\":null}");
+        writer.write("{\"code\":1999999,\"msg\":\"请尝试从网关访问，请重试。。。。\",\"data\":null}");
         return false;
 
     }
