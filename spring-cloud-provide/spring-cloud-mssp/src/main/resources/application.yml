@@ -32,13 +32,10 @@ hystrix:
         timeout:
           enabled: false
 management:
-  health:
-    db:
-      enabled: false
   endpoints:
-      web:
-        exposure:
-          include: "*"
+    web:
+      exposure:
+        include: "*"
   endpoint:
     health:
       show-details: always
