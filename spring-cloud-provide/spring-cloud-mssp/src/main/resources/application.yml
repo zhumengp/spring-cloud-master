@@ -39,3 +39,6 @@ management:
   endpoint:
     health:
       show-details: always
+logging:
+  level:
+    io.swagger.models.parameters.AbstractSerializableParameter: error

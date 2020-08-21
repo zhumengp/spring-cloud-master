@@ -17,7 +17,6 @@ import org.com.zhump.result.BaseResult;
 import org.com.zhump.result.Result;
 import org.com.zhump.validator.NotNullValidator;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +25,7 @@ import java.util.List;
 
 @RestController
 @Log4j2
-@RequestMapping(value = "/premission")
+@RequestMapping(value = "/resource")
 @Api(value = "MSSP - MsspPremissionController",tags = {"资源管理模块"},produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class MsspPremissionController {
 
