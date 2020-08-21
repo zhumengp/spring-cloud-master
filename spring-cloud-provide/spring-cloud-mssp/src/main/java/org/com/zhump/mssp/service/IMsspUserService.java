@@ -11,7 +11,7 @@ public interface IMsspUserService {
 
     int countByExample(MsspUserExample example);
     int deleteByExample(MsspUserExample example);
-    int deleteByPrimaryKey(Long id);
+    boolean deleteByPrimaryKey(Long id);
     int insertSelective(MsspUser record);
     List<MsspUser> selectByExample(MsspUserExample example);
     MsspUser selectByPrimaryKey(Long id);

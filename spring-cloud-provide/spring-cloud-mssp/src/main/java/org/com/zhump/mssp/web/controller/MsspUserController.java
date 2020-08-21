@@ -120,7 +120,6 @@ public class MsspUserController {
     /**
      * 编辑用户
      */
-
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST",value = "编辑用户信息")
     public BaseResult edit(@RequestBody MsspUserEditDTO msspUserEditDto){

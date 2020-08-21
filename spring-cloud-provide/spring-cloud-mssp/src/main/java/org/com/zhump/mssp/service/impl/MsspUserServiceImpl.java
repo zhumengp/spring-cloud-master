@@ -16,6 +16,8 @@ public class MsspUserServiceImpl implements IMsspUserService {
     @Resource
     MsspUserMapper msspUserMapper;
 
+    @
+
 
     @Override
     public int countByExample(MsspUserExample example) {
@@ -28,8 +30,14 @@ public class MsspUserServiceImpl implements IMsspUserService {
     }
 
     @Override
-    public int deleteByPrimaryKey(Long id) {
-        return msspUserMapper.deleteByPrimaryKey(id);
+    public boolean deleteByPrimaryKey(Long id) {
+        int i = msspUserMapper.deleteByPrimaryKey(id);
+        if (i < 0){
+            return false;
+        }
+        //DATO
+        //删除用户角色
+        return true;
     }
 
     @Override

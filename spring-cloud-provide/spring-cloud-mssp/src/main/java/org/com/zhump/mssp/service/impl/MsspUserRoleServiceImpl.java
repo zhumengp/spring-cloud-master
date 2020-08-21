@@ -41,7 +41,7 @@ public class MsspUserRoleServiceImpl implements IMsspUserRoleService {
             msspUserRole.setRoleId(roleId);
             int insert = msspUserRoleMapper.insert(msspUserRole);
             if (insert <= 0){
-                throw new MsspBusinessException(ErrorEnum.MSSP10000002.getCode(),"赋值权限失败");
+                throw new MsspBusinessException(ErrorEnum.MSSP10000002.getCode(),"赋值用户角色失败");
             }
         });
         return true;
