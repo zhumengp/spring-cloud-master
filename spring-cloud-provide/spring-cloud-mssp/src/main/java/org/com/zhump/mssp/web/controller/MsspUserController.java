@@ -16,7 +16,9 @@ import org.com.zhump.mssp.web.dto.MsspUserAddDTO;
 import org.com.zhump.mssp.web.dto.MsspUserEditDTO;
 import org.com.zhump.result.BaseResult;
 import org.com.zhump.result.Result;
+import org.com.zhump.validator.IntegerNotNullValidator;
 import org.com.zhump.validator.NotNullValidator;
+import org.com.zhump.validator.SizeValidator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
 import org.springframework.util.DigestUtils;
@@ -63,6 +65,8 @@ public class MsspUserController {
                 .on(msspUserAddDto.getName(),new NotNullValidator("用户名"))
                 .on(msspUserAddDto.getPassword(),new NotNullValidator("密码"))
                 .on(msspUserAddDto.getPhone(),new NotNullValidator("手机号"))
+                .on(msspUserAddDto.getLocked(),new SizeValidator(1,2,"禁用类型"))
+                .on(msspUserAddDto.getSex(),new SizeValidator(1,2,"性别"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!re.isSuccess()){
@@ -120,14 +124,12 @@ public class MsspUserController {
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST",value = "编辑用户信息")
     public BaseResult edit(@RequestBody MsspUserEditDTO msspUserEditDto){
-        if (msspUserEditDto.getId() == null){
-            throw new IllegalArgumentException("ID不能为空");
-        }
         ComplexResult re = FluentValidator.checkAll()
                 .on(msspUserEditDto.getAccountName(), new NotNullValidator("账号"))
                 .on(msspUserEditDto.getName(),new NotNullValidator("用户名"))
                 .on(msspUserEditDto.getPassword(),new NotNullValidator("密码"))
                 .on(msspUserEditDto.getPhone(),new NotNullValidator("手机号"))
+                .on(msspUserEditDto.getId(),new IntegerNotNullValidator("用户ID"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!re.isSuccess()){
