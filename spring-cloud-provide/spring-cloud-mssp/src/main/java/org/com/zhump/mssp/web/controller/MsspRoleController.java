@@ -11,23 +11,18 @@ import lombok.extern.log4j.Log4j2;
 import org.com.zhump.enums.ErrorEnum;
 import org.com.zhump.mssp.entity.MsspRole;
 import org.com.zhump.mssp.entity.MsspRoleExample;
-import org.com.zhump.mssp.entity.MsspUser;
-import org.com.zhump.mssp.entity.MsspUserExample;
 import org.com.zhump.mssp.service.IMsspRoleService;
-import org.com.zhump.mssp.service.IMsspUserService;
-import org.com.zhump.mssp.web.dto.MsspRoleAddDTO;
-import org.com.zhump.mssp.web.dto.MsspRoleEditDTO;
-import org.com.zhump.mssp.web.dto.MsspUserAddDTO;
-import org.com.zhump.mssp.web.dto.MsspUserEditDTO;
+import org.com.zhump.mssp.service.IMsspUserRoleService;
+import org.com.zhump.mssp.web.dto.*;
 import org.com.zhump.result.BaseResult;
 import org.com.zhump.result.Result;
 import org.com.zhump.validator.NotNullValidator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,6 +34,9 @@ public class MsspRoleController {
 
     @Resource
     private IMsspRoleService msspRoleService;
+
+    @Resource
+    private IMsspUserRoleService msspUserRoleService;
 
 
     /**
@@ -118,7 +116,6 @@ public class MsspRoleController {
     /**
      * 编辑用户
      */
-
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST",value = "编辑用户信息")
     @ApiParam(name = "msspRoleEditDto", value = "编辑角色Dto")
@@ -139,6 +136,27 @@ public class MsspRoleController {
         role.setId(msspRoleEditDto.getRoleId());
         int i = msspRoleService.updateByPrimaryKeySelective(role);
         if (i > 0){
+            return Result.ok();
+        }
+        return Result.wrap(ErrorEnum.MSSP10000002.getCode(),ErrorEnum.MSSP10000002.getMsg());
+    }
+
+    /**
+     * 赋值角色权限
+     */
+    @RequestMapping(value = "/addUserRole",method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST",value = "新增角色权限")
+    @ApiParam(name = "msspUserRoleAddDto", value = "赋值角色权限")
+    public BaseResult addUserRole(@RequestBody MsspUserRoleAddDTO msspUserRoleAddDto){
+        if (msspUserRoleAddDto.getUserId() == null || msspUserRoleAddDto.getRoleIds().length <= 0){
+            throw new IllegalArgumentException("参数不能为空");
+        }
+        List<Long> list = new ArrayList<>();
+        for (Long roleId : msspUserRoleAddDto.getRoleIds()){
+            list.add(roleId);
+        }
+        boolean insert = msspUserRoleService.insert(msspUserRoleAddDto.getUserId(), list);
+        if (insert){
             return Result.ok();
         }
         return Result.wrap(ErrorEnum.MSSP10000002.getCode(),ErrorEnum.MSSP10000002.getMsg());

@@ -15,13 +15,15 @@ import java.util.concurrent.TimeUnit;
 @Component(value = "RedisUtils")
 public class RedisUtils {
 
+    private static final long timeout = 1000 * 60 * 5;
+
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
 
 
     /**
-     * 取数据
+     * get data by key
      */
     public String get(String key){
         String s = stringRedisTemplate.opsForValue().get(key);
@@ -29,19 +31,17 @@ public class RedisUtils {
     }
 
     /**
-     * 创建全局唯一ID，有效时长为5分钟
+     * create a globally unique token, valid for 5 minutes
+     * This token is used by downstream services
      */
     public String createToken(String key){
         if (StringUtils.isBlank(key)){
             return null;
         }
-        /**
-         * get token
-         */
         String token = stringRedisTemplate.opsForValue().get(key);
         if (StringUtils.isBlank(token)){
             token = UUID.randomUUID().toString().replace("-","");
-            stringRedisTemplate.opsForValue().set(key,token, 5,TimeUnit.MINUTES);
+            stringRedisTemplate.opsForValue().set(key,token, timeout,TimeUnit.SECONDS);
         }
         return token;
 

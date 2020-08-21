@@ -50,6 +50,6 @@ public class MyGatewayFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return -999;
+        return -2;
     }
 }

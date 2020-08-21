@@ -7,8 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MsspRoleAddDTO {
+public class MsspUserRoleAddDTO {
 
-    private String name;
-    private String remark;
+    private Long userId;
+    private Long[] roleIds;
 }
