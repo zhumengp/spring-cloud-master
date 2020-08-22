@@ -33,7 +33,6 @@ import java.util.List;
 @Api(value = "MSSP - MsspUserController",tags = {"用户管理模块"},produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class MsspUserController {
 
-
     @Resource
     private IMsspUserService msspUserService;
 
@@ -48,6 +47,13 @@ public class MsspUserController {
     @ApiImplicitParam(name = "userId",value = "用户ID")
     public BaseResult getByUserId(@PathVariable(value = "userId") Long userId){
         log.info("查询用户数据ID：{}",userId);
+        ComplexResult re = FluentValidator.checkAll()
+                .on(userId, new IntegerNotNullValidator("用户Id"))
+                .doValidate()
+                .result(ResultCollectors.toComplex());
+        if (!re.isSuccess()){
+            return Result.wrap(ErrorEnum.DSP10000002.getCode(),ErrorEnum.DSP10000002.getMsg(),re.getErrors());
+        }
         MsspUser user = msspUserService.selectByPrimaryKey(userId);
         return Result.ok(user);
     }
@@ -98,8 +104,8 @@ public class MsspUserController {
     @ApiOperation(httpMethod = "DELETE",value = "删除用户")
     public BaseResult delete(@ApiParam(name = "userId",value = "用户ID") @PathVariable(value = "userId") Long userId){
         log.info("删除用户数据ID：{}",userId);
-        int delete = msspUserService.deleteByPrimaryKey(userId);
-        if (delete > 0){
+        boolean delete = msspUserService.deleteByPrimaryKey(userId);
+        if (delete){
             return Result.ok();
         }
         return Result.error();
@@ -129,6 +135,8 @@ public class MsspUserController {
                 .on(msspUserEditDto.getPassword(),new NotNullValidator("密码"))
                 .on(msspUserEditDto.getPhone(),new NotNullValidator("手机号"))
                 .on(msspUserEditDto.getId(),new IntegerNotNullValidator("用户ID"))
+                .on(msspUserEditDto.getLocked(),new SizeValidator(1,2,"锁"))
+                .on(msspUserEditDto.getSex(),new SizeValidator(1,2,"性别"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!re.isSuccess()){
@@ -142,5 +150,9 @@ public class MsspUserController {
         }
         return Result.wrap(ErrorEnum.MSSP10000002.getCode(),ErrorEnum.MSSP10000002.getMsg());
     }
+
+    /**
+     * 根据用户id
+     */
 
 }

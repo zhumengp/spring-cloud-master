@@ -47,12 +47,18 @@ public class MsspUserRoleServiceImpl implements IMsspUserRoleService {
         return true;
     }
 
-
-
-
-
-
-
+    /**
+     * 删除用户对应的角色
+     * @param userId
+     * @return
+     */
+    @Override
+    public boolean delete(Long userId) {
+        MsspUserRoleExample example = new MsspUserRoleExample();
+        example.createCriteria().andUserIdEqualTo(userId);
+        msspUserRoleMapper.deleteByExample(example);
+        return true;
+    }
 
 
 }
