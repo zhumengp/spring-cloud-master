@@ -1,4 +1,4 @@
-package org.com.zhump.mssp.web;
+package org.com.zhump.mssp.web.rpc;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

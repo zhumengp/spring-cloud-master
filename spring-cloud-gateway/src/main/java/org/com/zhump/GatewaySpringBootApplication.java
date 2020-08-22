@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Import;
 public class GatewaySpringBootApplication {
 
     public static void main(String[] args) {
-        System.out.println();
         SpringApplication.run(GatewaySpringBootApplication.class,args);
     }
 

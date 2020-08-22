@@ -75,9 +75,14 @@ public class MsspPremissionController {
     @ApiOperation(httpMethod = "POST",value = "新增资源")
     public BaseResult edit(@RequestBody MsspPremissionEditDTO msspPremissionEditDto){
         ComplexResult result = FluentValidator.checkAll()
-                .on(msspPremissionEditDto.getName(), new NotNullValidator("资源名称"))
-                .on(msspPremissionEditDto.getIcon(), new NotNullValidator("图标"))
-                .on(msspPremissionEditDto.getPermissionValue(), new NotNullValidator("权限名"))
+                .on(msspPremissionEditDto.getName(), new NotNullValidator<String>("资源名称"))
+                .on(msspPremissionEditDto.getIcon(), new NotNullValidator<String>("图标"))
+                .on(msspPremissionEditDto.getPermissionValue(), new NotNullValidator<String>("权限名"))
+                .on(msspPremissionEditDto.getPid(),new NotNullValidator<Integer>("父级编号"))
+                .on(msspPremissionEditDto.getSystemId(),new NotNullValidator<Integer>("系统编号"))
+                .on(msspPremissionEditDto.getId(),new NotNullValidator<Integer>("资源ID"))
+                .on(msspPremissionEditDto.getOrders(),new NotNullValidator<>("排序编号"))
+                .on(msspPremissionEditDto.getType(),new NotNullValidator<Byte>("类型"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()){
