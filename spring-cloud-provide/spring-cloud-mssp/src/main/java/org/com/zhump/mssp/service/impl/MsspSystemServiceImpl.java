@@ -37,7 +37,7 @@ public class MsspSystemServiceImpl implements IMsspSystemService {
     }
 
     @Override
-    public MsspSystem selectByPrimaryKey(Integer id) {
+    public MsspSystem selectByPrimaryKey(Long id) {
         return msspSystemMapper.selectByPrimaryKey(id);
     }
 

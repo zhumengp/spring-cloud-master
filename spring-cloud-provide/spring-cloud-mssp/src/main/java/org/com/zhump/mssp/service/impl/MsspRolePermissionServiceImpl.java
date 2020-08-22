@@ -30,13 +30,13 @@ public class MsspRolePermissionServiceImpl implements IMsspRolePermissionService
 
     @Transactional(readOnly = false, isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     @Override
-    public boolean add(Integer roleId, List<Integer> resources) {
+    public boolean add(Long roleId, List<Long> resources) {
         //删除
         MsspRolePermissionExample example = new MsspRolePermissionExample();
         example.createCriteria().andRoleIdEqualTo(roleId);
         msspRolePermissionMapper.deleteByExample(example);
         //新增
-        for (Integer resource : resources){
+        for (Long resource : resources){
             MsspRolePermission recode = new MsspRolePermission();
             recode.setRoleId(roleId);
             recode.setPermissionId(resource);
@@ -46,5 +46,10 @@ public class MsspRolePermissionServiceImpl implements IMsspRolePermissionService
             }
         }
         return true;
+    }
+
+    @Override
+    public List<MsspRolePermission> selectActive(MsspRolePermissionExample example) {
+        return msspRolePermissionMapper.selectByExample(example);
     }
 }

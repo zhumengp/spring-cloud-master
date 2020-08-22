@@ -36,7 +36,7 @@ public class MsspPermissionServiceImpl implements IMsspPermissionService {
     }
 
     @Override
-    public MsspPermission selectByPrimaryKey(Integer id) {
+    public MsspPermission selectByPrimaryKey(Long id) {
         return msspPermissionMapper.selectByPrimaryKey(id);
     }
 

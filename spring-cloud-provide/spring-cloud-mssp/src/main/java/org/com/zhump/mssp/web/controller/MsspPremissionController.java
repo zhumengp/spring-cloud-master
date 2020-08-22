@@ -51,9 +51,9 @@ public class MsspPremissionController {
     @ApiOperation(httpMethod = "POST",value = "新增资源")
     public BaseResult add(@RequestBody MsspPremissionAddDTO msspPremissionAddDto){
         ComplexResult result = FluentValidator.checkAll()
-                                                .on(msspPremissionAddDto.getName(), new NotNullValidator("资源名称"))
-                                                .on(msspPremissionAddDto.getIcon(), new NotNullValidator("图标"))
-                                                .on(msspPremissionAddDto.getPermissionValue(), new NotNullValidator("权限名"))
+                                                .on(msspPremissionAddDto.getName(), new NotNullValidator<>("资源名称"))
+                                                .on(msspPremissionAddDto.getIcon(), new NotNullValidator<>("图标"))
+                                                .on(msspPremissionAddDto.getPermissionValue(), new NotNullValidator<>("权限名"))
                                                 .doValidate()
                                                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()){
@@ -78,11 +78,11 @@ public class MsspPremissionController {
                 .on(msspPremissionEditDto.getName(), new NotNullValidator<String>("资源名称"))
                 .on(msspPremissionEditDto.getIcon(), new NotNullValidator<String>("图标"))
                 .on(msspPremissionEditDto.getPermissionValue(), new NotNullValidator<String>("权限名"))
-                .on(msspPremissionEditDto.getPid(),new NotNullValidator<Integer>("父级编号"))
-                .on(msspPremissionEditDto.getSystemId(),new NotNullValidator<Integer>("系统编号"))
-                .on(msspPremissionEditDto.getId(),new NotNullValidator<Integer>("资源ID"))
+                .on(msspPremissionEditDto.getPid(),new NotNullValidator<Long>("父级编号"))
+                .on(msspPremissionEditDto.getSystemId(),new NotNullValidator<Long>("系统编号"))
+                .on(msspPremissionEditDto.getId(),new NotNullValidator<Long>("资源ID"))
                 .on(msspPremissionEditDto.getOrders(),new NotNullValidator<>("排序编号"))
-                .on(msspPremissionEditDto.getType(),new NotNullValidator<Byte>("类型"))
+                .on(msspPremissionEditDto.getType(),new NotNullValidator<Integer>("类型"))
                 .doValidate()
                 .result(ResultCollectors.toComplex());
         if (!result.isSuccess()){
@@ -104,7 +104,7 @@ public class MsspPremissionController {
      */
     @DeleteMapping(value = "/delete/{id}")
     @ApiOperation(httpMethod = "DELETE",value = "删除资源")
-    public BaseResult delete(@PathVariable(value = "id")Integer id){
+    public BaseResult delete(@PathVariable(value = "id")Long id){
         if (id == null){
             throw new IllegalArgumentException("ID不能为空");
         }

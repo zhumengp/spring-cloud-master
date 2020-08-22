@@ -12,6 +12,6 @@ public interface IMsspSystemService {
     int deleteByExample(MsspSystemExample example);
     int insertSelective(MsspSystem record);
     List<MsspSystem> selectByExample(MsspSystemExample example);
-    MsspSystem selectByPrimaryKey(Integer id);
+    MsspSystem selectByPrimaryKey(Long id);
     int updateByExampleSelective(@Param("record") MsspSystem record, @Param("example") MsspSystemExample example);
 }

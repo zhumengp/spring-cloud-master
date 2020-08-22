@@ -14,6 +14,7 @@ import org.com.zhump.mssp.entity.MsspRoleExample;
 import org.com.zhump.mssp.service.IMsspRoleService;
 import org.com.zhump.mssp.service.IMsspUserRoleService;
 import org.com.zhump.mssp.web.dto.*;
+import org.com.zhump.mssp.web.vo.MenusTreeVO;
 import org.com.zhump.result.BaseResult;
 import org.com.zhump.result.Result;
 import org.com.zhump.validator.NotNullValidator;
@@ -161,5 +162,16 @@ public class MsspRoleController {
         }
         return Result.wrap(ErrorEnum.MSSP10000002.getCode(),ErrorEnum.MSSP10000002.getMsg());
     }
+
+    /**
+     * 通过角色ID查询有哪些权限
+     */
+    @RequestMapping(value = "/findByRoleId/{roleId}",method = RequestMethod.GET)
+    @ApiOperation(httpMethod = "GET",value = "查询角色权限")
+    public BaseResult findByRoleId(@PathVariable(value = "roleId") Long roleId){
+        List<MenusTreeVO> menus = msspRoleService.menus(roleId);
+        return Result.ok(menus);
+    }
+
 
 }

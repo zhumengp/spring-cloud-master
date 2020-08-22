@@ -17,7 +17,7 @@ public interface IMsspPermissionService {
 
     List<MsspPermission> selectByExample(MsspPermissionExample example);
 
-    MsspPermission selectByPrimaryKey(Integer id);
+    MsspPermission selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") MsspPermission record, @Param("example") MsspPermissionExample example);
 }

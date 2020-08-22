@@ -104,7 +104,7 @@ public class MsspSystemController {
      */
     @DeleteMapping(value = "/delete/{id}")
     @ApiOperation(httpMethod = "DELETE",value = "删除资源")
-    public BaseResult delete(@PathVariable(value = "id")Integer id){
+    public BaseResult delete(@PathVariable(value = "id")Long id){
         if (id == null){
             throw new IllegalArgumentException("ID不能为空");
         }

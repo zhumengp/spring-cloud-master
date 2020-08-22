@@ -1,6 +1,9 @@
 package org.com.zhump.mssp.service;
 
 
+import org.com.zhump.mssp.entity.MsspRolePermission;
+import org.com.zhump.mssp.entity.MsspRolePermissionExample;
+
 import java.util.List;
 
 public interface IMsspRolePermissionService {
@@ -11,5 +14,7 @@ public interface IMsspRolePermissionService {
      * @param resources
      * @return
      */
-    boolean add(Integer roleId,List<Integer> resources);
+    boolean add(Long roleId,List<Long> resources);
+
+    List<MsspRolePermission> selectActive(MsspRolePermissionExample example);
 }

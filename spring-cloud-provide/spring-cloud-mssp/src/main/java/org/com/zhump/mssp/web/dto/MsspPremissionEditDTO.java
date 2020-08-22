@@ -11,18 +11,18 @@ import lombok.Setter;
 public class MsspPremissionEditDTO {
 
     @ApiModelProperty(value = "资源ID")
-    private Integer id;
+    private Long id;
     /**系统ID*/
     @ApiModelProperty(value = "系统编号")
-    private Integer systemId;
+    private Long systemId;
     /**父Id*/
     @ApiModelProperty(value = "父ID")
-    private Integer pid;
+    private Long pid;
     @ApiModelProperty(value = "资源名称")
     private String name;
     /**类型 1：菜单 2： 目录 3：按钮*/
     @ApiModelProperty(value = "类型")
-    private Byte type;
+    private Integer type;
     @ApiModelProperty(value = "资源权限")
     private String permissionValue;
     @ApiModelProperty(value = "资源访问地址")
@@ -31,7 +31,7 @@ public class MsspPremissionEditDTO {
     private String icon;
     /**状态 1：启动 2：禁用*/
     @ApiModelProperty(value = "状态")
-    private Byte status;
+    private Integer status;
     /**排序*/
     @ApiModelProperty(value = "排序")
     private Long orders;
