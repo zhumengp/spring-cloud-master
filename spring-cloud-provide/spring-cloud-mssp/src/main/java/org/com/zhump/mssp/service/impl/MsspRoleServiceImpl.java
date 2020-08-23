@@ -1,12 +1,9 @@
 package org.com.zhump.mssp.service.impl;
 
 import org.com.zhump.mssp.dao.MsspRoleMapper;
-import org.com.zhump.mssp.dao.MsspUserMapper;
 import org.com.zhump.mssp.entity.*;
 import org.com.zhump.mssp.service.*;
-import org.com.zhump.mssp.web.controller.MsspPremissionController;
 import org.com.zhump.mssp.web.vo.MenusTreeVO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

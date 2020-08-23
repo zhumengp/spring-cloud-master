@@ -18,6 +18,10 @@ public interface IMsspUserService {
     int updateByExampleSelective(@Param("record") MsspUser record, @Param("example") MsspUserExample example);
     int updateByPrimaryKeySelective(MsspUser record);
 
+    /**
+     * 根据用户和密码获取用户信息
+     */
+
 
 
 }

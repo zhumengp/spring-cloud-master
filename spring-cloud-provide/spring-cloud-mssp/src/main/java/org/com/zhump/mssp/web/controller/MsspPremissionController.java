@@ -10,8 +10,10 @@ import org.com.zhump.enums.ErrorEnum;
 import org.com.zhump.mssp.entity.MsspPermission;
 import org.com.zhump.mssp.entity.MsspPermissionExample;
 import org.com.zhump.mssp.service.IMsspPermissionService;
+import org.com.zhump.mssp.service.IMsspRolePermissionService;
 import org.com.zhump.mssp.web.dto.MsspPremissionAddDTO;
 import org.com.zhump.mssp.web.dto.MsspPremissionEditDTO;
+import org.com.zhump.mssp.web.dto.MsspRolePremissionAddDTO;
 import org.com.zhump.result.BaseResult;
 import org.com.zhump.result.Result;
 import org.com.zhump.validator.NotNullValidator;
@@ -20,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,6 +33,9 @@ public class MsspPremissionController {
 
     @Resource
     private IMsspPermissionService msspPermissionService;
+
+    @Resource
+    private IMsspRolePermissionService msspRolePermissionService;
 
     /**
      * 列表查询
@@ -115,6 +121,32 @@ public class MsspPremissionController {
             return Result.ok();
         }
         return Result.wrap(ErrorEnum.MSSP10000002.getCode(),ErrorEnum.MSSP10000002.getMsg());
+    }
+
+    /**
+     * 新增角色权限
+     */
+    @RequestMapping(value = "/addRolePremission/",method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST",value = "新增角色权限")
+    public BaseResult addRolePremission(@RequestBody MsspRolePremissionAddDTO msspRolePremissionAddDto){
+        ComplexResult result = FluentValidator.checkAll()
+                .on(msspRolePremissionAddDto.getRoleId(), new NotNullValidator<>("角色ID"))
+                .doValidate()
+                .result(ResultCollectors.toComplex());
+        if (!result.isSuccess()){
+            return Result.wrap(ErrorEnum.DSP10000002.getCode(),ErrorEnum.DSP10000002.getMsg(),result.getErrors());
+        }
+        List<Long> premissionIds = new ArrayList<>();
+        for (Long premissionId : msspRolePremissionAddDto.getPremissionId()){
+            premissionIds.add(premissionId);
+        }
+
+        boolean add = msspRolePermissionService.add(msspRolePremissionAddDto.getRoleId(), premissionIds);
+        if (add){
+            return Result.ok();
+        }
+        return Result.wrap(ErrorEnum.MSSP10000002.getCode(),ErrorEnum.MSSP10000002.getMsg());
+
     }
 
 }
