@@ -1,0 +1,48 @@
+server:
+  port: 7011
+spring:
+  application:
+    name: report
+  profiles:
+    active: reportDev
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+    enabled: true
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1.0
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: always
+    time-zone: GMT+8
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:6011/eureka/
+  instance:
+    lease-expiration-duration-in-seconds: 10
+    health-check-url-path: /actuator/health
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+logging:
+  level:
+    io.swagger.models.parameters.AbstractSerializableParameter: error
