@@ -1,0 +1,18 @@
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:6011/eureka/
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/zhumengp/spring-cloud-config.git
+          search-paths: config
+          default-label: master
+  application:
+    name: spring-cloud-config-server
+server:
+  port: 9091
