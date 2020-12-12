@@ -18,8 +18,12 @@ import org.com.zhump.result.BaseResult;
 import org.com.zhump.result.Result;
 import org.com.zhump.validator.NotNullValidator;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -36,6 +40,7 @@ public class MsspPremissionController {
 
     @Resource
     private IMsspRolePermissionService msspRolePermissionService;
+
 
     /**
      * 列表查询

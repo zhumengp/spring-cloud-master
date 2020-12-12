@@ -34,8 +34,8 @@
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <!--interval属性用来指定多久滚动一次，默认是1 hour-->
-                <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="12"/>
+                <SizeBasedTriggeringPolicy size="512MB"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
             <DefaultRolloverStrategy max="15"/>
@@ -48,8 +48,8 @@
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <!--interval属性用来指定多久滚动一次，默认是1 hour-->
-                <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="12"/>
+                <SizeBasedTriggeringPolicy size="512MB"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
             <DefaultRolloverStrategy max="15"/>
@@ -62,16 +62,16 @@
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <!--interval属性用来指定多久滚动一次，默认是1 hour-->
-                <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="12"/>
+                <SizeBasedTriggeringPolicy size="512MB"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
             <DefaultRolloverStrategy max="15"/>
         </RollingFile>
-        <Socket name="Logstash" host="10.10.203.21" port="5044" protocol="TCP">
+        <!--<Socket name="Logstash" host="10.10.203.21" port="5044" protocol="TCP">-->
         <!--<Socket name="Logstash" host="192.168.112.102" port="5044" protocol="TCP">-->
-            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}" />
-        </Socket>
+          <!--  <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}" />
+        </Socket>-->
     </appenders>
     <!--Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。-->
     <!--然后定义loggers，只有定义了logger并引入的appender，appender才会生效-->

@@ -10,8 +10,8 @@
         <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
         <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%X{X-B3-TraceId},%X{X-B3-SpanId}] - %msg%n" />
         <!-- 定义日志存储的路径 -->
-        <property name="FILE_PATH" value="F://var//mssp9011/log" />
-        <property name="FILE_NAME" value="mssp" />
+        <property name="FILE_PATH" value="F://var//report7011/log" />
+        <property name="FILE_NAME" value="report" />
     </Properties>
 
     <appenders>
@@ -34,8 +34,8 @@
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <!--interval属性用来指定多久滚动一次，默认是1 hour-->
-                <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="12"/>
+                <SizeBasedTriggeringPolicy size="512MB"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
             <DefaultRolloverStrategy max="15"/>
@@ -48,8 +48,8 @@
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <!--interval属性用来指定多久滚动一次，默认是1 hour-->
-                <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="12"/>
+                <SizeBasedTriggeringPolicy size="512MB"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
             <DefaultRolloverStrategy max="15"/>
@@ -62,8 +62,8 @@
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <!--interval属性用来指定多久滚动一次，默认是1 hour-->
-                <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="12"/>
+                <SizeBasedTriggeringPolicy size="512MB"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
             <DefaultRolloverStrategy max="15"/>

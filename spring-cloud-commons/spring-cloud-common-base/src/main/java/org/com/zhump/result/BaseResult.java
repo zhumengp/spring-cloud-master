@@ -5,7 +5,6 @@ package org.com.zhump.result;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.io.Serializable;
 

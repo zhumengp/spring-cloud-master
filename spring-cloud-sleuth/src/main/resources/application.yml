@@ -21,14 +21,14 @@ management:
     web:
       server:
         auto-time-requests: false
-zipkin:
-  storage:
-    StorageComponent: elasticsearch
-    type: elasticsearch
-    elasticsearch:
-      #hosts: 192.168.112.100:9200
-      hosts: 10.10.203.21:9200
-      cluster: elasticsearchCluster #Cluster
-      index: zipkin-server
-      index-shards: 5
-      index-replicas: 1
+#zipkin:
+#  storage:
+#    StorageComponent: elasticsearch
+#    type: elasticsearch
+#    elasticsearch:
+#      #hosts: 192.168.112.100:9200
+#      hosts: 10.10.203.21:9200
+#      cluster: elasticsearchCluster #Cluster
+#      index: zipkin-server
+#      index-shards: 5
+#      index-replicas: 1
