@@ -92,16 +92,6 @@
             <artifactId>lombok</artifactId>
             <version>1.18.6</version>
         </dependency>
-<<<<<<< HEAD
-        <!--<dependency>
-=======
-       <dependency>
->>>>>>> 2da8331fbc0f54ffb1a8ad1c7ba0e135d47d8a6d
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.7.0</version>
-        </dependency>-->
-
 
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
@@ -131,13 +121,5 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.4</version>
         </dependency>
-<<<<<<< HEAD
-=======
-        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-ribbon -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-        </dependency>
->>>>>>> 2da8331fbc0f54ffb1a8ad1c7ba0e135d47d8a6d
     </dependencies>
 </project>
