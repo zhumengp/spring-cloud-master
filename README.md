@@ -12,3 +12,4 @@
 | spring-cloud-provide| 各个服务模块| 所有接口模块|
 | spring-cloud-api|各个服务公共模块|支持远程调用，熔断机制|
 | spring-cloud-sleuth|链路跟踪|所有服务链路跟踪器|
+| spring-cloud-config|配置中心|存放所有配置文件，后续支持实时更新不需要重启项目|
