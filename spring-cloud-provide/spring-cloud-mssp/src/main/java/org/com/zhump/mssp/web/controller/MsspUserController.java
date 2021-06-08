@@ -90,10 +90,7 @@ public class MsspUserController {
         String md5 = DigestUtils.md5DigestAsHex((recod.getAccountName() + recod.getPassword()).getBytes());
         recod.setPassword(md5);
         int result = msspUserService.insertSelective(recod);
-        if (result > 0){
-            return Result.ok();
-        }
-        return Result.error();
+        return result > 0 ? Result.ok() : Result.error();
     }
 
     /**

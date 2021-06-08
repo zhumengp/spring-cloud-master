@@ -1,9 +1,9 @@
 package org.com.zhump.mssp.service.impl;
 
-import com.google.common.base.Preconditions;
 import org.com.zhump.mssp.dao.MsspUserMapper;
 import org.com.zhump.mssp.entity.MsspUser;
 import org.com.zhump.mssp.entity.MsspUserExample;
+import org.com.zhump.mssp.exception.MsspBusinessException;
 import org.com.zhump.mssp.service.IMsspUserRoleService;
 import org.com.zhump.mssp.service.IMsspUserService;
 import org.springframework.stereotype.Service;
@@ -34,12 +34,20 @@ public class MsspUserServiceImpl implements IMsspUserService {
     public int deleteByExample(MsspUserExample example) {
         return msspUserMapper.deleteByExample(example);
     }
+
+    /**
+    * Title:
+    * Description:根据用户ID删除用户，以及删除用户下面的角色
+    * @author zhump
+    * @version 1.0.0
+    * @date 2021/6/8 23:25
+    */
     @Transactional(readOnly = false, isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     @Override
     public boolean deleteByPrimaryKey(Long id) {
         int i = msspUserMapper.deleteByPrimaryKey(id);
         if (i < 0){
-            return false;
+            throw new MsspBusinessException("删除用户异常");
         }
         //DATO
         //删除用户角色

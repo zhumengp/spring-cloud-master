@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Service(value = "IDspAdvertLable")
@@ -34,14 +35,13 @@ public class DspAdvertLableImpl implements IDspAdvertLable {
         if (list == null || list.size() <= 0){
             return true;
         }
-        List<DspAdvertLabel> lableList = new ArrayList<>();
-        list.stream().forEach(action ->{
+        List<DspAdvertLabel> lableList = list.stream().map(action ->{
             DspAdvertLabel dspAdvertLabel = new DspAdvertLabel();
             dspAdvertLabel.setAdId(adId);
             dspAdvertLabel.setCrowdId(crowdId);
             dspAdvertLabel.setLabelId(action.getLableId());
-            lableList.add(dspAdvertLabel);
-        });
+            return dspAdvertLabel;
+        }).collect(Collectors.toList());
         Map<String,Object> map = new HashMap<>();
         map.put("items",lableList);
         Integer result = dspAdvertLabelMapper.insertBatch(map);

@@ -25,6 +25,7 @@ public class MsspBusinessException extends BusinessException {
         log.info("<== MsspBusinessException, code:{}, message:{}", this.code, super.getMessage());
     }
 
+
     /**
      * Instantiates a new MsspBusinessException rpc exception.
      *
@@ -34,6 +35,14 @@ public class MsspBusinessException extends BusinessException {
     public MsspBusinessException(int code, String msg) {
         super(code, msg);
         log.info("<== MsspBusinessException, code:{}, message:{}", this.code, super.getMessage());
+    }
+
+    /**
+     * 只需要传字符串
+     * @param message
+     */
+    public MsspBusinessException(String message) {
+        super(message);
     }
 
     /**
