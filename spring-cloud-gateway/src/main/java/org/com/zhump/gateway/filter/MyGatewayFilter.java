@@ -40,9 +40,10 @@ public class MyGatewayFilter implements GlobalFilter, Ordered {
         //放入redis
         String token = redisUtils.createToken(GatewayConstant.SECRET_KEY);
         //拦截的逻辑。根据具体业务逻辑做拦截。
-        ServerHttpRequest request = exchange.getRequest().mutate()
-                .headers(httpHeaders -> httpHeaders.remove(GatewayConstant.SECRET_KEY))
-                .build();
+        ServerHttpRequest request = exchange.getRequest()
+                                                        .mutate()
+                                                        .headers(httpHeaders -> httpHeaders.remove(GatewayConstant.SECRET_KEY))
+                                                        .build();
         ServerHttpRequest newRequest = request.mutate().headers(httpHeaders -> {httpHeaders.set(GatewayConstant.SECRET_KEY,token);}).build();
         return chain.filter(exchange.mutate().request(newRequest.mutate().build()).build());
 

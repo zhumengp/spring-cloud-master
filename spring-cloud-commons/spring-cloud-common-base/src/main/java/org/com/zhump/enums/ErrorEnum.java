@@ -6,8 +6,12 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import java.io.Serializable;
 
 /**
- * 公共枚举值
- */
+* Title:ErrorEnum
+* Description: 异常枚举类
+* @author zhump
+* @version 1.0.0
+* @date 2021/6/8 23:11
+*/
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public enum ErrorEnum implements Serializable {
 
