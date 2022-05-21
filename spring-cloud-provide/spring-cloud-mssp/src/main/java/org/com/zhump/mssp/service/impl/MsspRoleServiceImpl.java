@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MsspRoleServiceImpl implements IMsspRoleService {
@@ -80,15 +81,15 @@ public class MsspRoleServiceImpl implements IMsspRoleService {
             return systems;
         }
         //组装系统集合
-        msspSystems.stream().forEach(system ->{
+        systems = msspSystems.stream().map(system->{
             MenusTreeVO menusTreeVO = new MenusTreeVO();
             menusTreeVO.setId(system.getId());
             menusTreeVO.setLabel(system.getName());
             menusTreeVO.setPid(0L);
             menusTreeVO.setUrl("");
             menusTreeVO.setChecked(true);
-            systems.add(menusTreeVO);
-        });
+            return menusTreeVO;
+        }).collect(Collectors.toList());
         //组装具体权限菜单
         for (MenusTreeVO system : systems){
             //通过系统ID去获取有哪些资源
