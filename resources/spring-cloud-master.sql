@@ -14,7 +14,7 @@ MySQL - 8.0.18 : Database - zhump_blog
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`zhump_blog` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
-USE `zhump_blog`;
+USE `mboss`;
 
 /*Table structure for table `branch_table` */
 
