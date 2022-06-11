@@ -25,3 +25,8 @@ management:
   endpoint:
     health:
       show-details: always
+
+
+logging:
+  path: /Users/zhumengping/java/log/eureka6011/
+  config: classpath:log4j2-spring.xml
